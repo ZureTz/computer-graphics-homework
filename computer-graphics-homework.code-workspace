@@ -1,0 +1,22 @@
+{
+  "folders": [
+    {
+      "path": "."
+    },
+    {
+      "path": "./color-picker"
+    }
+  ],
+  "settings": {
+    "cSpell.words": [
+      "alphanum",
+      "echojwt",
+      "eqfield",
+      "gomail",
+      "labstack",
+      "sonner",
+      "sqlc",
+      "sslmode"
+    ]
+  }
+}
