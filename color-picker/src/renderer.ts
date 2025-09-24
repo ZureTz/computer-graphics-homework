@@ -26,8 +26,13 @@
  * ```
  */
 
-import './index.css';
+import "./index.css";
+import "./app";
 
 console.log(
-  '👋 This message is being logged by "renderer.ts", included via Vite',
+  '👋 This message is being logged by "renderer.ts", included via Vite'
+);
+
+console.log(
+  `Node.js version: ${(window as any).versions.node()}\nChrome version: ${(window as any).versions.chrome()}\nElectron version: ${(window as any).versions.electron()}`
 );
