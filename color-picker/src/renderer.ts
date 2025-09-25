@@ -33,6 +33,7 @@ console.log(
   '👋 This message is being logged by "renderer.ts", included via Vite'
 );
 
+const versionsAPI = (window as any).versions;
 console.log(
-  `Node.js version: ${(window as any).versions.node()}\nChrome version: ${(window as any).versions.chrome()}\nElectron version: ${(window as any).versions.electron()}`
+  `Node.js version: ${versionsAPI.node()}\nChrome version: ${versionsAPI.chrome()}\nElectron version: ${versionsAPI.electron()}`
 );
