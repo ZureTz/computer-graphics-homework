@@ -2,7 +2,7 @@
   "name": "color-picker",
   "productName": "color-picker",
   "version": "1.0.0",
-  "description": "My Electron application description",
+  "description": "A simple color picker built with Electron and React.",
   "main": ".vite/build/main.js",
   "scripts": {
     "start": "electron-forge start",
@@ -35,7 +35,7 @@
     "electron": "38.1.2",
     "eslint": "^8.57.1",
     "eslint-plugin-import": "^2.32.0",
-    "typescript": "~4.5.4",
+    "typescript": "~4.5.5",
     "vite": "^5.4.20"
   },
   "dependencies": {
