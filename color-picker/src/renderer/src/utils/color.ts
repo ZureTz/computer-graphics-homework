@@ -120,7 +120,7 @@ export function parseRgbString(rgbString: string): RgbColor | null {
 }
 
 export function parseHsvString(hsvString: string): HsvColor | null {
-  const match = hsvString.match(/^hsv\(\s*(\d+)\s*,\s*(\d+)%\s*,\s*(\d+)%\s*\)$/i);
+  const match = hsvString.match(/^hsv\(\s*(\d+)°?\s*,\s*(\d+)%\s*,\s*(\d+)%\s*\)$/i);
   if (!match) return null;
 
   const h = parseInt(match[1], 10);

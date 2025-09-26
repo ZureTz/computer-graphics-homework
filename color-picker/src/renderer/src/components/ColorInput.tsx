@@ -21,7 +21,7 @@ export default function ColorInput({
   const rgbColor = convertHsvToRgb(hsvColor);
   const hexString = convertRgbToHex(rgbColor);
   const rgbString = `rgb(${rgbColor.r}, ${rgbColor.g}, ${rgbColor.b})`;
-  const hsvString = `hsv(${Math.round(hsvColor.h)}, ${Math.round(hsvColor.s)}%, ${Math.round(hsvColor.v)}%)`;
+  const hsvString = `hsv(${Math.round(hsvColor.h)}°, ${Math.round(hsvColor.s)}%, ${Math.round(hsvColor.v)}%)`;
 
   const [rgbInput, setRgbInput] = useState(rgbString);
   const [hsvInput, setHsvInput] = useState(hsvString);
@@ -91,7 +91,7 @@ export default function ColorInput({
       <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6">
         <div className="flex items-center gap-4">
           <div
-            className="h-16 w-16 rounded-2xl border-2 border-white/30 shadow-xl ring-2 ring-white/10 transition-all duration-300"
+            className="h-16 w-16 rounded-2xl border-2 border-white/30 shadow-xl ring-2 ring-white/10 transition-colors duration-200"
             style={{ background: rgbString }}
             aria-label="Color preview"
           />
@@ -116,8 +116,8 @@ export default function ColorInput({
                   onChange={(e) => setHsvInput(e.target.value)}
                   onBlur={(e) => handleHsvChange(e.target.value)}
                   onKeyDown={(e) => e.key === "Enter" && handleHsvChange(e.currentTarget.value)}
-                  className="font-mono text-sm text-white bg-black/20 border border-white/20 outline-none w-48 px-3 py-2 rounded-lg hover:bg-black/30 focus:bg-black/40 focus:ring-2 focus:ring-white/30 transition-all duration-200"
-                  placeholder="hsv(360, 100%, 100%)"
+                  className="font-mono text-sm text-white bg-black/20 border border-white/20 outline-none w-54 px-3 py-2 rounded-lg hover:bg-black/30 focus:bg-black/40 focus:ring-2 focus:ring-white/30 transition-all duration-200"
+                  placeholder="hsv(360°, 100%, 100%)"
                 />
               </div>
               <input
