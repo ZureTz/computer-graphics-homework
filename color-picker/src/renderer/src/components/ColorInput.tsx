@@ -107,7 +107,7 @@ export default function ColorInput({
                   onChange={(e) => setRgbInput(e.target.value)}
                   onBlur={(e) => handleRgbChange(e.target.value)}
                   onKeyDown={(e) => e.key === "Enter" && handleRgbChange(e.currentTarget.value)}
-                  className="font-mono text-sm text-white bg-black/20 border border-white/20 outline-none w-44 px-3 py-2 rounded-lg hover:bg-black/30 focus:bg-black/40 focus:ring-2 focus:ring-white/30 transition-all duration-200"
+                  className="font-mono text-sm text-white bg-black/20 border border-white/20 outline-none w-54 px-3 py-2 rounded-lg hover:bg-black/30 focus:bg-black/40 focus:ring-2 focus:ring-white/30 transition-all duration-200"
                   placeholder="rgb(255, 255, 255)"
                 />
                 <input
