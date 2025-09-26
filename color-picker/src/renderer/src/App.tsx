@@ -11,57 +11,66 @@ function App(): React.JSX.Element {
   const rgbColor = convertHsvToRgb(hsvColor);
   return (
     <div
-      className="min-h-screen text-zinc-100 antialiased px-6 pt-16 pb-24 flex flex-col items-center gap-8 selection:bg-sky-500/30 selection:text-white"
-      style={{ background: `rgb(${rgbColor.r}, ${rgbColor.g}, ${rgbColor.b})` }}
+      className="min-h-screen text-zinc-100 antialiased px-4 sm:px-6 pt-12 pb-20 flex flex-col items-center gap-4 sm:gap-6 selection:bg-sky-500/30 selection:text-white transition-colors duration-300"
+      style={{
+        background: `linear-gradient(135deg, rgb(${rgbColor.r}, ${rgbColor.g}, ${rgbColor.b}) 0%, rgb(${Math.max(0, rgbColor.r - 20)}, ${Math.max(0, rgbColor.g - 20)}, ${Math.max(0, rgbColor.b - 20)}) 100%)`
+      }}
     >
-      <header className="sticky top-0 z-20 w-full">
-        <div className="max-w-2xl mx-auto rounded-xl bg-zinc-950/40 backdrop-blur border border-white/10 shadow-sm">
-          <div className="py-3 flex justify-center">
-            <h1 className="text-3xl font-semibold tracking-tight bg-gradient-to-r from-sky-400 via-cyan-300 to-emerald-300 bg-clip-text text-transparent drop-shadow">
+      <header className="sticky top-0 z-20 pt-3">
+        <div className="inline-block rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 shadow-2xl">
+          <div className="py-3 px-6">
+            <h1 className="text-3xl sm:text-4xl font-bold tracking-tight bg-gradient-to-r from-white via-white/90 to-white/70 bg-clip-text text-transparent drop-shadow-lg">
               Color Picker
             </h1>
           </div>
         </div>
       </header>
 
-      <div className="w-full flex-1 flex items-center">
+      <main className="w-full flex-1 flex items-center justify-center px-2">
         <Toaster
-          position="bottom-right"
+          position="top-center"
           reverseOrder={false}
-          gutter={10}
-          containerStyle={{ margin: 50 }}
+          gutter={12}
+          containerStyle={{
+            top: 120,
+            left: 20,
+            right: 20
+          }}
           toastOptions={{
-            duration: 2000,
+            duration: 2500,
             style: {
-              background: "rgba(9, 9, 11, 0.6)", // zinc-950/60
-              color: "#e5e7eb", // zinc-200
-              border: "1px solid rgba(255, 255, 255, 0.08)",
-              boxShadow: "0 8px 24px rgba(0, 0, 0, 0.25)",
-              backdropFilter: "blur(8px)",
-              WebkitBackdropFilter: "blur(8px)",
-              borderRadius: "12px"
+              background: "rgba(0, 0, 0, 0.8)",
+              color: "#ffffff",
+              border: "1px solid rgba(255, 255, 255, 0.15)",
+              boxShadow: "0 12px 32px rgba(0, 0, 0, 0.4)",
+              backdropFilter: "blur(16px)",
+              WebkitBackdropFilter: "blur(16px)",
+              borderRadius: "16px",
+              padding: "12px 16px",
+              fontSize: "14px",
+              fontWeight: "500"
             },
             success: {
               style: {
-                border: "1px solid rgba(16, 185, 129, 0.35)", // emerald-500
-                color: "#d1fae5" // emerald-100
+                border: "1px solid rgba(34, 197, 94, 0.4)",
+                background: "rgba(34, 197, 94, 0.1)"
               }
             },
             error: {
               style: {
-                border: "1px solid rgba(244, 63, 94, 0.35)", // rose-500
-                color: "#ffe4e6" // rose-100
+                border: "1px solid rgba(239, 68, 68, 0.4)",
+                background: "rgba(239, 68, 68, 0.1)"
               }
             }
           }}
         />
         <ColorInput hsvColor={hsvColor} setColor={setHsvColor} />
-      </div>
+      </main>
 
-      <footer className="fixed inset-x-0 bottom-0 z-20 bg-zinc-950/40 backdrop-blur border-t border-white/10">
-        <div className="w-full max-w-2xl mx-auto px-4 sm:px-6 py-2.5 sm:py-3 flex flex-col sm:flex-row items-center sm:items-center justify-center sm:justify-between gap-2 sm:gap-3">
+      <footer className="fixed inset-x-0 bottom-0 z-20 bg-black/20 backdrop-blur-xl border-t border-white/20">
+        <div className="w-full max-w-4xl mx-auto px-4 sm:px-8 py-3 sm:py-4 flex flex-col sm:flex-row items-center justify-center sm:justify-between gap-3 sm:gap-4">
           <Versions />
-          <p className="text-[11px] text-zinc-200 whitespace-normal sm:whitespace-nowrap text-center sm:text-right drop-shadow mt-1 sm:mt-0">
+          <p className="text-xs text-white/80 font-medium text-center sm:text-right drop-shadow-sm">
             Built for homework - {new Date().getFullYear()}
           </p>
         </div>
