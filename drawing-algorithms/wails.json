@@ -1,0 +1,12 @@
+{
+  "name": "drawing-algorithms",
+  "outputfilename": "drawing-algorithms",
+  "frontend:install": "bun install",
+  "frontend:build": "bun run build",
+  "frontend:dev:watcher": "bun run dev",
+  "frontend:dev:serverUrl": "auto",
+  "author": {
+    "name": "ZureTz",
+    "email": "2819058133@qq.com"
+  }
+}

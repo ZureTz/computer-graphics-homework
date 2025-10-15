@@ -5,9 +5,14 @@
     },
     {
       "path": "../color-picker"
+    },
+    {
+      "path": "../drawing-algorithms"
     }
   ],
   "settings": {
-    "cSpell.words": []
+    "cSpell.words": [
+      "opengl"
+    ]
   }
 }
