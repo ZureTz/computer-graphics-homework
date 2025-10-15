@@ -1,0 +1,40 @@
+<svg width="800" height="800" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif">
+  <style>
+    .grid-line { stroke: #ccc; stroke-width: 1; }
+    .axis-line { stroke: #333; stroke-width: 2; }
+    .label { font-size: 15px; }
+    .x-label { text-anchor: middle; dominant-baseline: baseline; }
+    .y-label { text-anchor: start; dominant-baseline: middle; }
+  </style>
+
+  <defs>
+    <g id="grid">
+      <!-- Vertical Lines -->
+      <path d="M -10 0 V 800 M 10 0 V 800 M 30 0 V 800 M 50 0 V 800 M 70 0 V 800 M 90 0 V 800 M 110 0 V 800 M 130 0 V 800 M 150 0 V 800 M 170 0 V 800 M 190 0 V 800 M 210 0 V 800 M 230 0 V 800 M 250 0 V 800 M 270 0 V 800 M 290 0 V 800 M 310 0 V 800 M 330 0 V 800 M 350 0 V 800 M 370 0 V 800 M 390 0 V 800 M 410 0 V 800 M 430 0 V 800 M 450 0 V 800 M 470 0 V 800 M 490 0 V 800 M 510 0 V 800 M 530 0 V 800 M 550 0 V 800 M 570 0 V 800 M 590 0 V 800 M 610 0 V 800 M 630 0 V 800 M 650 0 V 800 M 670 0 V 800 M 690 0 V 800 M 710 0 V 800 M 730 0 V 800 M 750 0 V 800 M 770 0 V 800 M 790 0 V 800" class="grid-line" />
+      <!-- Horizontal Lines -->
+      <path d="M 0 -10 H 800 M 0 10 H 800 M 0 30 H 800 M 0 50 H 800 M 0 70 H 800 M 0 90 H 800 M 0 110 H 800 M 0 130 H 800 M 0 150 H 800 M 0 170 H 800 M 0 190 H 800 M 0 210 H 800 M 0 230 H 800 M 0 250 H 800 M 0 270 H 800 M 0 290 H 800 M 0 310 H 800 M 0 330 H 800 M 0 350 H 800 M 0 370 H 800 M 0 390 H 800 M 0 410 H 800 M 0 430 H 800 M 0 450 H 800 M 0 470 H 800 M 0 490 H 800 M 0 510 H 800 M 0 530 H 800 M 0 550 H 800 M 0 570 H 800 M 0 590 H 800 M 0 610 H 800 M 0 630 H 800 M 0 650 H 800 M 0 670 H 800 M 0 690 H 800 M 0 710 H 800 M 0 730 H 800 M 0 750 H 800 M 0 770 H 800 M 0 790 H 800" class="grid-line" />
+    </g>
+  </defs>
+
+  <use href="#grid" />
+
+  <!-- Axes -->
+  <line x1="400" y1="0" x2="400" y2="800" class="axis-line" /> <!-- Y-axis -->
+  <line x1="0" y1="400" x2="800" y2="400" class="axis-line" /> <!-- X-axis -->
+
+  <!-- Labels -->
+  <g class="label">
+    <!-- X-axis labels -->
+    <text x="12" y="798" class="x-label">-20</text>
+    <text x="200" y="798" class="x-label">-10</text>
+    <text x="408" y="798" class="x-label">0</text>
+    <text x="600" y="798" class="x-label">10</text>
+    <text x="800" y="798" class="x-label" style="text-anchor: end;">20</text>
+
+    <!-- Y-axis labels -->
+    <text x="2" y="600" class="y-label">-10</text>
+    <text x="2" y="392" class="y-label">0</text>
+    <text x="2" y="200" class="y-label">10</text>
+    <text x="2" y="0" class="y-label" style="dominant-baseline: hanging;">20</text>
+  </g>
+</svg>

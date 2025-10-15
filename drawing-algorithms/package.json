@@ -27,7 +27,8 @@
     "electron-updater": "^6.3.9",
     "konva": "^10.0.2",
     "react-konva": "^19.0.10",
-    "tailwindcss": "^4.1.14"
+    "tailwindcss": "^4.1.14",
+    "use-image": "^1.1.4"
   },
   "devDependencies": {
     "@electron-toolkit/eslint-config-prettier": "^3.0.0",

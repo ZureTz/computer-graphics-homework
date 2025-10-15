@@ -1,0 +1,40 @@
+<svg width="400" height="400" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif">
+  <style>
+    .grid-line { stroke: #ccc; stroke-width: 1; }
+    .axis-line { stroke: #333; stroke-width: 2; }
+    .label { font-size: 8px; text-anchor: middle; dominant-baseline: middle; }
+    .x-label { text-anchor: middle; dominant-baseline: baseline; }
+    .y-label { text-anchor: start; dominant-baseline: middle; }
+  </style>
+
+  <defs>
+    <g id="grid">
+      <!-- Vertical Lines -->
+      <path d="M -10 0 V 400 M 10 0 V 400 M 30 0 V 400 M 50 0 V 400 M 70 0 V 400 M 90 0 V 400 M 110 0 V 400 M 130 0 V 400 M 150 0 V 400 M 170 0 V 400 M 190 0 V 400 M 210 0 V 400 M 230 0 V 400 M 250 0 V 400 M 270 0 V 400 M 290 0 V 400 M 310 0 V 400 M 330 0 V 400 M 350 0 V 400 M 370 0 V 400 M 390 0 V 400" class="grid-line" />
+      <!-- Horizontal Lines -->
+      <path d="M 0 -10 H 400 M 0 10 H 400 M 0 30 H 400 M 0 50 H 400 M 0 70 H 400 M 0 90 H 400 M 0 110 H 400 M 0 130 H 400 M 0 150 H 400 M 0 170 H 400 M 0 190 H 400 M 0 210 H 400 M 0 230 H 400 M 0 250 H 400 M 0 270 H 400 M 0 290 H 400 M 0 310 H 400 M 0 330 H 400 M 0 350 H 400 M 0 370 H 400 M 0 390 H 400" class="grid-line" />
+    </g>
+  </defs>
+
+  <use href="#grid" />
+
+  <!-- Axes -->
+  <line x1="200" y1="0" x2="200" y2="400" class="axis-line" /> <!-- Y-axis -->
+  <line x1="0" y1="200" x2="400" y2="200" class="axis-line" /> <!-- X-axis -->
+
+  <!-- Labels -->
+  <g class="label">
+    <!-- X-axis labels -->
+    <text x="5" y="396" class="x-label">-10</text>
+    <text x="100" y="396" class="x-label">-5</text>
+    <text x="204" y="396" class="x-label">0</text>
+    <text x="300" y="396" class="x-label">5</text>
+    <text x="400" y="396" class="x-label" style="text-anchor: end;">10</text>
+
+    <!-- Y-axis labels -->
+    <text x="2" y="300" class="y-label">-5</text>
+    <text x="2" y="196" class="y-label">0</text>
+    <text x="2" y="100" class="y-label">5</text>
+    <text x="2" y="0" class="y-label" style="dominant-baseline: hanging;">10</text>
+  </g>
+</svg>
