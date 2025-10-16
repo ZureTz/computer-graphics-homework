@@ -1,31 +1,17 @@
-import { Stage, Layer, Circle, Image } from "react-konva";
-import useImage from "use-image";
-
-import grid40 from "./assets/grid40.svg";
+import PixelCanvas from "./components/PixelCanvas";
 import Versions from "./components/Versions";
-import { Point, logicalToCanvas40Point, canvas40UnitLength, canvasLength } from "./utils/canvas";
 
 function App(): React.JSX.Element {
-  const [grid40Image] = useImage(grid40);
-  const circleCenter: Point = { x: 1, y: 1 };
-  const convertedCircleCenter = logicalToCanvas40Point(circleCenter);
   return (
-    <div className="min-h-screen bg-gray-100 flex flex-col items-center justify-center p-4 space-y-6">
-      <div className="w-full max-w-2xl bg-white rounded-lg shadow p-4 flex flex-col items-center">
-        <Stage width={canvasLength} height={canvasLength} className="mx-auto">
-          <Layer>
-            <Image image={grid40Image} x={0} y={0} width={canvasLength} height={canvasLength} />
-            <Circle
-              x={convertedCircleCenter.x}
-              y={convertedCircleCenter.y}
-              radius={canvas40UnitLength * 5}
-              fill="rgba(255, 0, 0, 0.5)"
-              draggable
-            />
-          </Layer>
-        </Stage>
+    <div className="min-h-screen bg-gray-50 flex flex-col items-center justify-center p-4">
+      <div className="w-full max-w-fit bg-white rounded-xl shadow-lg p-6 space-y-4">
+        <div className="border rounded-lg overflow-hidden">
+          <PixelCanvas />
+        </div>
       </div>
-      <Versions />
+      <div className="text-xs text-gray-400 mt-4">
+        <Versions />
+      </div>
     </div>
   );
 }
