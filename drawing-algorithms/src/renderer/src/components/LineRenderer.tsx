@@ -7,19 +7,22 @@ import {
   canvasToLogicalPoint,
   canvasUnitLength
 } from "@renderer/utils/canvas";
-import { bresenhamLine } from "@renderer/utils/lines";
-import { ColorRGB, rgbToString, rgbToTransparentColor } from "@renderer/utils/color";
+import { bresenhamLine, ddaLine, wuxiaolinLine } from "@renderer/utils/lines";
+import { RGBAColor, rgbToString } from "@renderer/utils/color";
+import { PixelInfo } from "@renderer/utils/pixels";
 
-const BresenhamLine = ({
+const LineRenderer = ({
   start,
   end,
   color,
+  algorithm = "bresenham",
   onStartChange,
   onEndChange
 }: {
   start: Point;
   end: Point;
-  color: ColorRGB;
+  color: RGBAColor;
+  algorithm?: "bresenham" | "dda" | "wu";
   onStartChange?: (newStart: Point) => void;
   onEndChange?: (newEnd: Point) => void;
 }): React.JSX.Element => {
@@ -27,29 +30,38 @@ const BresenhamLine = ({
     convertedStart: logicalToCanvasPoint(start),
     convertedEnd: logicalToCanvasPoint(end)
   };
-  const bresenhamLinePixelsInfo = bresenhamLine(start, end, color);
+
+  // Use the selected algorithm
+  let linePixelsInfo: PixelInfo[] = [];
+  switch (algorithm) {
+    case "bresenham":
+      linePixelsInfo = bresenhamLine(start, end, color);
+      break;
+    case "dda":
+      linePixelsInfo = ddaLine(start, end, color);
+      break;
+    case "wu":
+      linePixelsInfo = wuxiaolinLine(start, end, color);
+      break;
+    default:
+      linePixelsInfo = bresenhamLine(start, end, color);
+      break;
+  }
 
   const handleStartDrag = (e: KonvaEventObject<DragEvent>): void => {
     if (!onStartChange) return;
     const newPos = e.target.position();
     const logicalPos = canvasToLogicalPoint(newPos);
-    onStartChange({
-      x: Math.round(logicalPos.x),
-      y: Math.round(logicalPos.y)
-    });
+    onStartChange(logicalPos);
   };
 
   const handleStartDragEnd = (e: KonvaEventObject<DragEvent>): void => {
     if (!onStartChange) return;
     const newPos = e.target.position();
     const logicalPos = canvasToLogicalPoint(newPos);
-    const roundedPos = {
-      x: Math.round(logicalPos.x),
-      y: Math.round(logicalPos.y)
-    };
-    onStartChange(roundedPos);
+    onStartChange(logicalPos);
     // 确保拖拽点准确对齐到网格
-    const finalCanvasPos = logicalToCanvasPoint(roundedPos);
+    const finalCanvasPos = logicalToCanvasPoint(logicalPos);
     e.target.position(finalCanvasPos);
   };
 
@@ -57,23 +69,16 @@ const BresenhamLine = ({
     if (!onEndChange) return;
     const newPos = e.target.position();
     const logicalPos = canvasToLogicalPoint(newPos);
-    onEndChange({
-      x: Math.round(logicalPos.x),
-      y: Math.round(logicalPos.y)
-    });
+    onEndChange(logicalPos);
   };
 
   const handleEndDragEnd = (e: KonvaEventObject<DragEvent>): void => {
     if (!onEndChange) return;
     const newPos = e.target.position();
     const logicalPos = canvasToLogicalPoint(newPos);
-    const roundedPos = {
-      x: Math.round(logicalPos.x),
-      y: Math.round(logicalPos.y)
-    };
-    onEndChange(roundedPos);
+    onEndChange(logicalPos);
     // 确保拖拽点准确对齐到网格
-    const finalCanvasPos = logicalToCanvasPoint(roundedPos);
+    const finalCanvasPos = logicalToCanvasPoint(logicalPos);
     e.target.position(finalCanvasPos);
   };
 
@@ -88,13 +93,13 @@ const BresenhamLine = ({
         lineJoin="round"
       />
       {/* Pixel of the lines */}
-      {bresenhamLinePixelsInfo.map((pixel, index) => (
+      {linePixelsInfo.map((pixel, index) => (
         <Rect
           x={pixel.x}
           y={pixel.y}
           width={pixel.width}
           height={pixel.height}
-          fill={rgbToTransparentColor(pixel.color, 0.5)}
+          fill={rgbToString({ ...pixel.color, a: 0.6 * (pixel.color.a ?? 1) })}
           key={index}
         />
       ))}
@@ -130,4 +135,4 @@ const BresenhamLine = ({
   );
 };
 
-export default BresenhamLine;
+export default LineRenderer;

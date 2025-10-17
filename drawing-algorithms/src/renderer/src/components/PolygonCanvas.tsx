@@ -34,9 +34,7 @@ const PolygonCanvas = (): React.JSX.Element => {
             <span className="w-2 h-2 bg-green-500 rounded-full"></span>
             操作说明
           </h3>
-          <p className="text-xs text-gray-600 leading-relaxed">
-            点击画布添加顶点，形成多边形。右键点击完成绘制。
-          </p>
+          <p className="text-xs text-gray-600 leading-relaxed">点击画布添加顶点，形成多边形。</p>
         </div>
       </div>
 
