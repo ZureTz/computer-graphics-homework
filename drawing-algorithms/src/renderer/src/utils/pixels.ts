@@ -1,15 +1,16 @@
 import { Point, logicalToCanvasPoint, canvasUnitLength, canvasUnitLengthHalf } from "./canvas";
+import { ColorRGB } from "./color";
 
 export type PixelInfo = {
   x: number;
   y: number;
-  color: string;
+  color: ColorRGB;
   width: number;
   height: number;
 };
 
 // Get a pixel element from a logical point and color
-export function getPixel(p: Point, color: string): PixelInfo {
+export function getPixel(p: Point, color: ColorRGB): PixelInfo {
   const actualPoint = logicalToCanvasPoint(p);
   return {
     x: actualPoint.x - canvasUnitLengthHalf,

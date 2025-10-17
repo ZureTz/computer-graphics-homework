@@ -8,8 +8,5 @@
   "[json]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  "cSpell.words": [
-    "Bresenham",
-    "konva"
-  ]
+  "cSpell.words": ["Bresenham", "konva"]
 }

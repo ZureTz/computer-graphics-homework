@@ -1,4 +1,4 @@
-export const canvasLength = 800;
+export const canvasLength = 600;
 export const canvasGridSize = 40;
 
 export const canvasUnitLength = canvasLength / canvasGridSize;

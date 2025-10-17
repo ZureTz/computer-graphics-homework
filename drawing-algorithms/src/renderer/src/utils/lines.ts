@@ -1,8 +1,9 @@
 import { Point } from "./canvas";
+import { ColorRGB } from "./color";
 import { PixelInfo, getPixel } from "./pixels";
 
 // Bresenham's line algorithm (-1 <= slope <= 1)
-function bresenhamLineLow(start: Point, end: Point, color: string): PixelInfo[] {
+function bresenhamLineLow(start: Point, end: Point, color: ColorRGB): PixelInfo[] {
   const { dx, dy } = { dx: end.x - start.x, dy: Math.abs(end.y - start.y) };
   const yIncrement = start.y < end.y ? 1 : -1;
 
@@ -23,7 +24,7 @@ function bresenhamLineLow(start: Point, end: Point, color: string): PixelInfo[] 
 }
 
 // Bresenham's line algorithm (slope < -1 or slope > 1)
-function bresenhamLineHigh(start: Point, end: Point, color: string): PixelInfo[] {
+function bresenhamLineHigh(start: Point, end: Point, color: ColorRGB): PixelInfo[] {
   const { dx, dy } = { dx: Math.abs(end.x - start.x), dy: end.y - start.y };
   const xIncrement = start.x < end.x ? 1 : -1;
 
@@ -44,7 +45,7 @@ function bresenhamLineHigh(start: Point, end: Point, color: string): PixelInfo[]
 }
 
 // Draw a line using Bresenham's line algorithm from (x0, y0) to (x1, y1)
-export function bresenhamLine(start: Point, end: Point, color: string): PixelInfo[] {
+export function bresenhamLine(start: Point, end: Point, color: ColorRGB): PixelInfo[] {
   if (Math.abs(end.y - start.y) < Math.abs(end.x - start.x)) {
     if (start.x > end.x) {
       return bresenhamLineLow(end, start, color);
