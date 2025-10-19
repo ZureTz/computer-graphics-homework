@@ -1,4 +1,5 @@
 import useImage from "use-image";
+import { KonvaEventObject } from "konva/lib/Node";
 import { Stage, Layer, Image } from "react-konva";
 import { useState } from "react";
 
@@ -64,12 +65,9 @@ const PolygonCanvas = (): React.JSX.Element => {
   };
 
   // 通过点击画布添加顶点
-  const handleCanvasClick = (e: unknown): void => {
-    const stage = (
-      e as {
-        target: { getStage: () => { getPointerPosition: () => { x: number; y: number } | null } };
-      }
-    ).target.getStage();
+  const handleCanvasClick = (e: KonvaEventObject<MouseEvent>): void => {
+    const stage = e.target.getStage();
+    if (!stage) return;
     const pointerPosition = stage.getPointerPosition();
     if (pointerPosition) {
       const logicalPoint = canvasToLogicalPoint(pointerPosition);
