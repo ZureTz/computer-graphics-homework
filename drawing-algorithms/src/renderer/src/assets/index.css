@@ -34,3 +34,27 @@ button:hover {
 .custom-scrollbar::-webkit-scrollbar-thumb:active {
   background: rgba(134, 239, 172, 0.9);
 }
+
+/* 全局样式优化 */
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* 输入框聚焦时的动画 */
+input:focus {
+  transform: scale(1.02);
+  transition: transform 0.15s ease-in-out;
+}
+
+/* 按钮点击动画 */
+button:active {
+  transform: scale(0.98);
+  transition: transform 0.1s ease-in-out;
+}
+
+/* 平滑过渡 */
+.smooth-transition {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+

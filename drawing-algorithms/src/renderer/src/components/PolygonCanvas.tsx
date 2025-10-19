@@ -8,7 +8,13 @@ import PolygonRenderer from "./PolygonRenderer";
 
 const PolygonCanvas = (): React.JSX.Element => {
   const [gridImage] = useImage(grid);
-  const [vertices, setVertices] = useState<Point[]>([]);
+  const [vertices, setVertices] = useState<Point[]>([
+    { x: -12, y: -8 },
+    { x: 0, y: -10 },
+    { x: 10, y: 0 },
+    { x: 5, y: 8 },
+    { x: -8, y: 5 }
+  ]);
 
   // 添加新顶点
   const handleAddVertex = (): void => {

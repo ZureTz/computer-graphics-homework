@@ -27,67 +27,107 @@ function App(): React.JSX.Element {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-blue-50 to-purple-50 flex flex-col items-center justify-center p-6">
-      <div className="w-full max-w-fit">
-        {/* Header */}
-        <div className="mb-6 text-center bg-white/60 backdrop-blur-sm rounded-xl border border-gray-300 shadow-sm p-4">
-          <h1 className="text-3xl font-semibold text-gray-700 mb-1">计算机图形学算法演示</h1>
-          <p className="text-gray-500 text-xs">交互式像素绘制算法可视化工具</p>
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 flex flex-col items-center justify-center p-8 pb-16 relative overflow-hidden">
+      {/* 装饰性背景元素 */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute -top-40 -right-40 w-80 h-80 bg-blue-200/30 rounded-full blur-3xl"></div>
+        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-purple-200/30 rounded-full blur-3xl"></div>
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-indigo-200/20 rounded-full blur-3xl"></div>
+      </div>
+
+      <div className="w-full max-w-fit relative z-10">
+        {/* Header - 简化版 */}
+        <div className="mb-4 text-center">
+          <h1 className="text-2xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent">
+            🎨 计算机图形学算法演示
+          </h1>
         </div>
 
         {/* Main Card */}
-        <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-2xl p-8 space-y-6 border border-gray-200">
+        <div className="bg-white/90 backdrop-blur-xl rounded-3xl shadow-2xl p-8 space-y-8 border border-white/60 hover:shadow-3xl transition-shadow duration-300">
           {/* Tab Navigation */}
-          <div className="flex justify-center gap-2 border-b-2 border-gray-200">
+          <div className="flex justify-center gap-3 pb-2">
             <button
-              className={`px-6 py-3 -mb-0.5 font-medium transition-all duration-200 ${
+              className={`group relative px-8 py-3.5 font-semibold rounded-xl transition-all duration-300 ${
                 activeCanvas === "line"
-                  ? "border-b-4 border-blue-500 text-blue-600 scale-105"
-                  : "border-b-4 border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 hover:scale-105"
+                  ? "bg-gradient-to-r from-blue-500 to-blue-600 text-white shadow-lg shadow-blue-500/30 scale-105"
+                  : "bg-gray-100/80 text-gray-600 hover:bg-gray-200/80 hover:scale-105 hover:shadow-md"
               }`}
               onClick={() => setActiveCanvas("line")}
             >
-              线段
+              <span className="relative z-10 flex items-center gap-2">
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M13 7l5 5m0 0l-5 5m5-5H6"
+                  />
+                </svg>
+                线段
+              </span>
             </button>
             <button
-              className={`px-6 py-3 -mb-0.5 font-medium transition-all duration-200 ${
+              className={`group relative px-8 py-3.5 font-semibold rounded-xl transition-all duration-300 ${
                 activeCanvas === "circle"
-                  ? "border-b-4 border-red-500 text-red-600 scale-105"
-                  : "border-b-4 border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 hover:scale-105"
+                  ? "bg-gradient-to-r from-red-500 to-rose-600 text-white shadow-lg shadow-red-500/30 scale-105"
+                  : "bg-gray-100/80 text-gray-600 hover:bg-gray-200/80 hover:scale-105 hover:shadow-md"
               }`}
               onClick={() => setActiveCanvas("circle")}
             >
-              圆
+              <span className="relative z-10 flex items-center gap-2">
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <circle cx="12" cy="12" r="9" strokeWidth={2} />
+                </svg>
+                圆
+              </span>
             </button>
             <button
-              className={`px-6 py-3 -mb-0.5 font-medium transition-all duration-200 ${
+              className={`group relative px-8 py-3.5 font-semibold rounded-xl transition-all duration-300 ${
                 activeCanvas === "ellipse"
-                  ? "border-b-4 border-purple-500 text-purple-600 scale-105"
-                  : "border-b-4 border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 hover:scale-105"
+                  ? "bg-gradient-to-r from-purple-500 to-violet-600 text-white shadow-lg shadow-purple-500/30 scale-105"
+                  : "bg-gray-100/80 text-gray-600 hover:bg-gray-200/80 hover:scale-105 hover:shadow-md"
               }`}
               onClick={() => setActiveCanvas("ellipse")}
             >
-              椭圆
+              <span className="relative z-10 flex items-center gap-2">
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <ellipse cx="12" cy="12" rx="9" ry="6" strokeWidth={2} />
+                </svg>
+                椭圆
+              </span>
             </button>
             <button
-              className={`px-6 py-3 -mb-0.5 font-medium transition-all duration-200 ${
+              className={`group relative px-8 py-3.5 font-semibold rounded-xl transition-all duration-300 ${
                 activeCanvas === "polygon"
-                  ? "border-b-4 border-green-500 text-green-600 scale-105"
-                  : "border-b-4 border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 hover:scale-105"
+                  ? "bg-gradient-to-r from-green-500 to-emerald-600 text-white shadow-lg shadow-green-500/30 scale-105"
+                  : "bg-gray-100/80 text-gray-600 hover:bg-gray-200/80 hover:scale-105 hover:shadow-md"
               }`}
               onClick={() => setActiveCanvas("polygon")}
             >
-              多边形
+              <span className="relative z-10 flex items-center gap-2">
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"
+                  />
+                </svg>
+                多边形
+              </span>
             </button>
           </div>
 
           {/* Canvas Container */}
-          <div className="rounded-xl overflow-hidden">{renderCanvas()}</div>
+          <div className="rounded-2xl overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100/50 p-4">
+            {renderCanvas()}
+          </div>
         </div>
       </div>
 
-      {/* Footer */}
-      <div className="fixed bottom-0 left-0 right-0 py-2 px-4 border-t bg-white/70 backdrop-blur-sm text-xs text-gray-400">
+      {/* Footer - Fixed定位 */}
+      <div className="fixed bottom-0 left-0 right-0 py-2 px-6 border-t border-white/30 bg-white/80 backdrop-blur-md shadow-lg z-50">
         <Versions />
       </div>
     </div>
