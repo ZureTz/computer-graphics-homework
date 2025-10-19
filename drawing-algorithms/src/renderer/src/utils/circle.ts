@@ -1,6 +1,6 @@
 import { Point } from "./canvas";
 import { RGBAColor } from "./color";
-import { getPixel, PixelInfo } from "./pixels";
+import { getPixel, PixelInfo, removeDuplicatePixels } from "./pixels";
 import {
   negateVec2,
   newVec2FromPoints,
@@ -8,7 +8,7 @@ import {
   reflectVec2AroundY,
   rotateVec2,
   Vec2
-} from "./transform";
+} from "./vec2";
 
 /**
  * 获取圆上一个点的8个对称点
@@ -106,5 +106,6 @@ export function midpointCircle(center: Point, radius: number, color: RGBAColor):
     // 否则选择正右方的像素，x 保持不变
   }
 
-  return pixels;
+  // 由于某些点可能重复（如45度点），需要去重
+  return removeDuplicatePixels(pixels);
 }

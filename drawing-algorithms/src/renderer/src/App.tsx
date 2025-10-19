@@ -47,7 +47,7 @@ function App(): React.JSX.Element {
               }`}
               onClick={() => setActiveCanvas("line")}
             >
-              📏 线段
+              线段
             </button>
             <button
               className={`px-6 py-3 -mb-0.5 font-medium transition-all duration-200 ${
@@ -57,7 +57,7 @@ function App(): React.JSX.Element {
               }`}
               onClick={() => setActiveCanvas("circle")}
             >
-              ⭕ 圆
+              圆
             </button>
             <button
               className={`px-6 py-3 -mb-0.5 font-medium transition-all duration-200 ${
@@ -67,7 +67,7 @@ function App(): React.JSX.Element {
               }`}
               onClick={() => setActiveCanvas("ellipse")}
             >
-              🥚 椭圆
+              椭圆
             </button>
             <button
               className={`px-6 py-3 -mb-0.5 font-medium transition-all duration-200 ${
@@ -77,7 +77,7 @@ function App(): React.JSX.Element {
               }`}
               onClick={() => setActiveCanvas("polygon")}
             >
-              ⬡ 多边形
+              多边形
             </button>
           </div>
 

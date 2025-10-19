@@ -7,7 +7,7 @@ import {
   canvasToLogicalPoint,
   canvasUnitLength
 } from "@renderer/utils/canvas";
-import { bresenhamLine, ddaLine, wuxiaolinLine } from "@renderer/utils/lines";
+import { bresenhamLine, ddaLine, wuxiaolinLine } from "@renderer/utils/line";
 import { RGBAColor, rgbaToString } from "@renderer/utils/color";
 import { PixelInfo } from "@renderer/utils/pixels";
 

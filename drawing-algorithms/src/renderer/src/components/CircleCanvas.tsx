@@ -51,7 +51,7 @@ const CircleCanvas = (): React.JSX.Element => {
                 type="number"
                 value={circleCenter.x}
                 onChange={(e) => handleInputChange("centerX", e.target.value)}
-                className="flex-1 px-3 py-1.5 text-sm border border-gray-300 rounded-md bg-gray-50"
+                className="flex-1 px-3 py-1.5 text-sm border border-gray-300 rounded-md"
               />
             </div>
             <div className="flex gap-2 items-center">
@@ -60,7 +60,7 @@ const CircleCanvas = (): React.JSX.Element => {
                 type="number"
                 value={circleCenter.y}
                 onChange={(e) => handleInputChange("centerY", e.target.value)}
-                className="flex-1 px-3 py-1.5 text-sm border border-gray-300 rounded-md bg-gray-50"
+                className="flex-1 px-3 py-1.5 text-sm border border-gray-300 rounded-md"
               />
             </div>
           </div>
@@ -75,7 +75,7 @@ const CircleCanvas = (): React.JSX.Element => {
             type="number"
             value={radius}
             onChange={(e) => handleInputChange("radius", e.target.value)}
-            className="w-full px-3 py-1.5 text-sm border border-gray-300 rounded-md bg-gray-50"
+            className="w-full px-3 py-1.5 text-sm border border-gray-300 rounded-md"
           />
         </div>
       </div>

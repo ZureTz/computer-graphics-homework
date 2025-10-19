@@ -20,3 +20,13 @@ export function getPixel(p: Point, color: RGBAColor): PixelInfo {
     height: canvasUnitLength
   };
 }
+
+// Remove duplicate pixels based on their (x, y) coordinates
+export function removeDuplicatePixels(pixels: PixelInfo[]): PixelInfo[] {
+  const uniquePixelsMap: Record<string, PixelInfo> = {};
+  for (const pixel of pixels) {
+    const key = `${pixel.x},${pixel.y}`;
+    uniquePixelsMap[key] = pixel;
+  }
+  return Object.values(uniquePixelsMap);
+}
