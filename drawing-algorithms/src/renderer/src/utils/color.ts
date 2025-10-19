@@ -5,6 +5,6 @@ export type RGBAColor = {
   a: number;
 };
 
-export function rgbToString(color: RGBAColor): string {
+export function rgbaToString(color: RGBAColor): string {
   return `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`;
 }

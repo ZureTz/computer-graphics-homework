@@ -1,18 +1,34 @@
 import useImage from "use-image";
-import { Stage, Layer, Image, Circle } from "react-konva";
+import { Stage, Layer, Image } from "react-konva";
 
 import grid from "@renderer/assets/grid-40.svg";
-import {
-  canvasLength,
-  canvasUnitLength,
-  logicalToCanvasPoint,
-  Point
-} from "@renderer/utils/canvas";
+import { canvasLength, Point } from "@renderer/utils/canvas";
+import { useState } from "react";
+import CircleRenderer from "./CircleRenderer";
 
 const CircleCanvas = (): React.JSX.Element => {
   const [gridImage] = useImage(grid);
-  const circleCenter: Point = { x: 0, y: 0 };
-  const convertedCircleCenter = logicalToCanvasPoint(circleCenter);
+  const [circleCenter, setCircleCenter] = useState<Point>({ x: 0, y: 0 });
+  const [radius, setRadius] = useState<number>(10);
+
+  const handleCenterChange = (newCenter: Point): void => {
+    setCircleCenter(newCenter);
+  };
+
+  const handleRadiusChange = (newRadius: number): void => {
+    setRadius(newRadius);
+  };
+
+  const handleInputChange = (type: "centerX" | "centerY" | "radius", value: string): void => {
+    const numValue = parseInt(value) || 0;
+    if (type === "centerX") {
+      setCircleCenter((prev) => ({ ...prev, x: numValue }));
+    } else if (type === "centerY") {
+      setCircleCenter((prev) => ({ ...prev, y: numValue }));
+    } else if (type === "radius") {
+      setRadius(numValue);
+    }
+  };
 
   return (
     <div className="flex gap-6 items-start">
@@ -34,7 +50,7 @@ const CircleCanvas = (): React.JSX.Element => {
               <input
                 type="number"
                 value={circleCenter.x}
-                disabled
+                onChange={(e) => handleInputChange("centerX", e.target.value)}
                 className="flex-1 px-3 py-1.5 text-sm border border-gray-300 rounded-md bg-gray-50"
               />
             </div>
@@ -43,7 +59,7 @@ const CircleCanvas = (): React.JSX.Element => {
               <input
                 type="number"
                 value={circleCenter.y}
-                disabled
+                onChange={(e) => handleInputChange("centerY", e.target.value)}
                 className="flex-1 px-3 py-1.5 text-sm border border-gray-300 rounded-md bg-gray-50"
               />
             </div>
@@ -57,8 +73,8 @@ const CircleCanvas = (): React.JSX.Element => {
           </h3>
           <input
             type="number"
-            value={5}
-            disabled
+            value={radius}
+            onChange={(e) => handleInputChange("radius", e.target.value)}
             className="w-full px-3 py-1.5 text-sm border border-gray-300 rounded-md bg-gray-50"
           />
         </div>
@@ -69,12 +85,12 @@ const CircleCanvas = (): React.JSX.Element => {
         <Stage width={canvasLength} height={canvasLength}>
           <Layer>
             <Image image={gridImage} x={0} y={0} width={canvasLength} height={canvasLength} />
-            <Circle
-              x={convertedCircleCenter.x}
-              y={convertedCircleCenter.y}
-              radius={canvasUnitLength * 5}
-              fill="rgba(255, 0, 0, 0.5)"
-              draggable
+            <CircleRenderer
+              center={circleCenter}
+              radius={radius}
+              color={{ r: 220, g: 38, b: 38, a: 1 }}
+              onCenterChange={handleCenterChange}
+              onRadiusChange={handleRadiusChange}
             />
           </Layer>
         </Stage>

@@ -8,7 +8,7 @@ import {
   canvasUnitLength
 } from "@renderer/utils/canvas";
 import { bresenhamLine, ddaLine, wuxiaolinLine } from "@renderer/utils/lines";
-import { RGBAColor, rgbToString } from "@renderer/utils/color";
+import { RGBAColor, rgbaToString } from "@renderer/utils/color";
 import { PixelInfo } from "@renderer/utils/pixels";
 
 const LineRenderer = ({
@@ -87,7 +87,7 @@ const LineRenderer = ({
       {/* Actual line drawn by the canvas */}
       <Line
         points={[convertedStart.x, convertedStart.y, convertedEnd.x, convertedEnd.y]}
-        stroke={rgbToString(color)}
+        stroke={rgbaToString(color)}
         strokeWidth={3}
         lineCap="round"
         lineJoin="round"
@@ -99,7 +99,7 @@ const LineRenderer = ({
           y={pixel.y}
           width={pixel.width}
           height={pixel.height}
-          fill={rgbToString({ ...pixel.color, a: 0.6 * (pixel.color.a ?? 1) })}
+          fill={rgbaToString({ ...pixel.color, a: 0.6 * (pixel.color.a ?? 1) })}
           key={index}
         />
       ))}
@@ -109,10 +109,12 @@ const LineRenderer = ({
           x={convertedStart.x}
           y={convertedStart.y}
           radius={canvasUnitLength * 0.6}
-          fill={rgbToString(color)}
+          fill={rgbaToString(color)}
           stroke="white"
           strokeWidth={2}
           draggable
+          onMouseEnter={() => (document.body.style.cursor = "move")}
+          onMouseLeave={() => (document.body.style.cursor = "default")}
           onDragMove={handleStartDrag}
           onDragEnd={handleStartDragEnd}
         />
@@ -123,10 +125,12 @@ const LineRenderer = ({
           x={convertedEnd.x}
           y={convertedEnd.y}
           radius={canvasUnitLength * 0.6}
-          fill={rgbToString(color)}
+          fill={rgbaToString(color)}
           stroke="white"
           strokeWidth={2}
           draggable
+          onMouseEnter={() => (document.body.style.cursor = "move")}
+          onMouseLeave={() => (document.body.style.cursor = "default")}
           onDragMove={handleEndDrag}
           onDragEnd={handleEndDragEnd}
         />
