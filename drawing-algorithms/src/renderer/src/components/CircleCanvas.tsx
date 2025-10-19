@@ -33,49 +33,49 @@ const CircleCanvas = (): React.JSX.Element => {
   return (
     <div className="flex gap-6 items-start">
       {/* Control Panel */}
-      <div className="flex flex-col gap-4 p-5 bg-gradient-to-br from-red-50 to-pink-50 rounded-xl border border-red-200 shadow-sm min-w-[220px]">
-        <div className="mb-2">
-          <h2 className="text-lg font-bold text-gray-800 mb-1">中点画圆算法</h2>
-          <p className="text-xs text-gray-600">使用中点画圆算法绘制圆形</p>
+      <div className="flex flex-col gap-3 p-4 bg-gradient-to-br from-red-50 to-pink-50 rounded-xl border border-red-200 shadow-sm w-[240px]">
+        <div className="mb-1">
+          <h2 className="text-base font-bold text-gray-800 mb-0.5">中点画圆</h2>
+          <p className="text-xs text-gray-600">Bresenham 圆算法</p>
         </div>
 
-        <div className="bg-white rounded-lg p-3 shadow-sm">
-          <h3 className="font-semibold text-sm text-red-700 mb-2 flex items-center gap-1">
-            <span className="w-2 h-2 bg-red-500 rounded-full"></span>
-            圆心坐标
+        <div className="bg-white rounded-lg p-2.5 shadow-sm">
+          <h3 className="font-semibold text-xs text-red-700 mb-1.5 flex items-center gap-1">
+            <span className="w-1.5 h-1.5 bg-red-500 rounded-full"></span>
+            圆心
           </h3>
-          <div className="space-y-2">
-            <div className="flex gap-2 items-center">
-              <label className="text-xs font-medium text-gray-600 w-5">X:</label>
+          <div className="space-y-1.5">
+            <div className="flex gap-1.5 items-center">
+              <label className="text-xs font-medium text-gray-600 w-3">X</label>
               <input
                 type="number"
                 value={circleCenter.x}
                 onChange={(e) => handleInputChange("centerX", e.target.value)}
-                className="flex-1 px-3 py-1.5 text-sm border border-gray-300 rounded-md"
+                className="flex-1 px-2 py-1 text-xs border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-red-400 focus:border-transparent transition-all"
               />
             </div>
-            <div className="flex gap-2 items-center">
-              <label className="text-xs font-medium text-gray-600 w-5">Y:</label>
+            <div className="flex gap-1.5 items-center">
+              <label className="text-xs font-medium text-gray-600 w-3">Y</label>
               <input
                 type="number"
                 value={circleCenter.y}
                 onChange={(e) => handleInputChange("centerY", e.target.value)}
-                className="flex-1 px-3 py-1.5 text-sm border border-gray-300 rounded-md"
+                className="flex-1 px-2 py-1 text-xs border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-red-400 focus:border-transparent transition-all"
               />
             </div>
           </div>
         </div>
 
-        <div className="bg-white rounded-lg p-3 shadow-sm">
-          <h3 className="font-semibold text-sm text-red-700 mb-2 flex items-center gap-1">
-            <span className="w-2 h-2 bg-red-500 rounded-full"></span>
+        <div className="bg-white rounded-lg p-2.5 shadow-sm">
+          <h3 className="font-semibold text-xs text-red-700 mb-1.5 flex items-center gap-1">
+            <span className="w-1.5 h-1.5 bg-red-500 rounded-full"></span>
             半径
           </h3>
           <input
             type="number"
             value={radius}
             onChange={(e) => handleInputChange("radius", e.target.value)}
-            className="w-full px-3 py-1.5 text-sm border border-gray-300 rounded-md"
+            className="w-full px-2 py-1 text-xs border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-red-400 focus:border-transparent transition-all"
           />
         </div>
       </div>

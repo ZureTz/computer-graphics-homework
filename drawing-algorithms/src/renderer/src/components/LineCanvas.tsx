@@ -32,19 +32,19 @@ const LineCanvas = (): React.JSX.Element => {
   return (
     <div className="flex gap-6 items-start">
       {/* Control Panel */}
-      <div className="flex flex-col gap-4 p-5 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl border border-blue-200 shadow-sm min-w-[220px]">
-        <div className="mb-2">
-          <h2 className="text-lg font-bold text-gray-800 mb-1">直线绘制算法</h2>
-          <p className="text-xs text-gray-600">选择算法并拖动端点或输入坐标</p>
+      <div className="flex flex-col gap-3 p-4 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl border border-blue-200 shadow-sm w-[240px]">
+        <div className="mb-1">
+          <h2 className="text-base font-bold text-gray-800 mb-0.5">直线绘制</h2>
+          <p className="text-xs text-gray-600">选择算法并拖动或输入坐标</p>
         </div>
 
         {/* Algorithm Selection */}
-        <div className="bg-white rounded-lg p-3 shadow-sm">
-          <h3 className="font-semibold text-sm text-blue-700 mb-2 flex items-center gap-1">
-            <span className="w-2 h-2 bg-blue-500 rounded-full"></span>
-            算法选择
+        <div className="bg-white rounded-lg p-2.5 shadow-sm">
+          <h3 className="font-semibold text-xs text-blue-700 mb-2 flex items-center gap-1">
+            <span className="w-1.5 h-1.5 bg-blue-500 rounded-full"></span>
+            算法
           </h3>
-          <div className="space-y-2">
+          <div className="space-y-1.5">
             <label className="flex items-center gap-2 cursor-pointer group">
               <input
                 type="radio"
@@ -52,10 +52,10 @@ const LineCanvas = (): React.JSX.Element => {
                 value="bresenham"
                 checked={algorithm === "bresenham"}
                 onChange={(e) => setAlgorithm(e.target.value as "bresenham" | "dda" | "wu")}
-                className="w-4 h-4 text-blue-600 focus:ring-2 focus:ring-blue-400 cursor-pointer"
+                className="w-3.5 h-3.5 text-blue-600 focus:ring-1 focus:ring-blue-400 cursor-pointer"
               />
-              <span className="text-sm text-gray-700 group-hover:text-blue-600 transition-colors">
-                Bresenham 算法
+              <span className="text-xs text-gray-700 group-hover:text-blue-600 transition-colors">
+                Bresenham
               </span>
             </label>
             <label className="flex items-center gap-2 cursor-pointer group">
@@ -65,10 +65,10 @@ const LineCanvas = (): React.JSX.Element => {
                 value="dda"
                 checked={algorithm === "dda"}
                 onChange={(e) => setAlgorithm(e.target.value as "bresenham" | "dda" | "wu")}
-                className="w-4 h-4 text-blue-600 focus:ring-2 focus:ring-blue-400 cursor-pointer"
+                className="w-3.5 h-3.5 text-blue-600 focus:ring-1 focus:ring-blue-400 cursor-pointer"
               />
-              <span className="text-sm text-gray-700 group-hover:text-blue-600 transition-colors">
-                DDA 算法
+              <span className="text-xs text-gray-700 group-hover:text-blue-600 transition-colors">
+                DDA
               </span>
             </label>
             <label className="flex items-center gap-2 cursor-pointer group">
@@ -78,65 +78,65 @@ const LineCanvas = (): React.JSX.Element => {
                 value="wu"
                 checked={algorithm === "wu"}
                 onChange={(e) => setAlgorithm(e.target.value as "bresenham" | "dda" | "wu")}
-                className="w-4 h-4 text-blue-600 focus:ring-2 focus:ring-blue-400 cursor-pointer"
+                className="w-3.5 h-3.5 text-blue-600 focus:ring-1 focus:ring-blue-400 cursor-pointer"
               />
-              <span className="text-sm text-gray-700 group-hover:text-blue-600 transition-colors">
-                吴小林算法
+              <span className="text-xs text-gray-700 group-hover:text-blue-600 transition-colors">
+                吴小林
               </span>
             </label>
           </div>
         </div>
 
-        <div className="space-y-3">
-          <div className="bg-white rounded-lg p-3 shadow-sm">
-            <h3 className="font-semibold text-sm text-blue-700 mb-2 flex items-center gap-1">
-              <span className="w-2 h-2 bg-blue-500 rounded-full"></span>
-              起点坐标
+        <div className="space-y-2.5">
+          <div className="bg-white rounded-lg p-2.5 shadow-sm">
+            <h3 className="font-semibold text-xs text-blue-700 mb-1.5 flex items-center gap-1">
+              <span className="w-1.5 h-1.5 bg-blue-500 rounded-full"></span>
+              起点
             </h3>
-            <div className="space-y-2">
-              <div className="flex gap-2 items-center">
-                <label className="text-xs font-medium text-gray-600 w-5">X:</label>
+            <div className="space-y-1.5">
+              <div className="flex gap-1.5 items-center">
+                <label className="text-xs font-medium text-gray-600 w-3">X</label>
                 <input
                   type="number"
                   value={start.x}
                   onChange={(e) => handleInputChange("start", "x", e.target.value)}
-                  className="flex-1 px-3 py-1.5 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition-all"
+                  className="flex-1 px-2 py-1 text-xs border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-blue-400 focus:border-transparent transition-all"
                 />
               </div>
-              <div className="flex gap-2 items-center">
-                <label className="text-xs font-medium text-gray-600 w-5">Y:</label>
+              <div className="flex gap-1.5 items-center">
+                <label className="text-xs font-medium text-gray-600 w-3">Y</label>
                 <input
                   type="number"
                   value={start.y}
                   onChange={(e) => handleInputChange("start", "y", e.target.value)}
-                  className="flex-1 px-3 py-1.5 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition-all"
+                  className="flex-1 px-2 py-1 text-xs border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-blue-400 focus:border-transparent transition-all"
                 />
               </div>
             </div>
           </div>
 
-          <div className="bg-white rounded-lg p-3 shadow-sm">
-            <h3 className="font-semibold text-sm text-blue-700 mb-2 flex items-center gap-1">
-              <span className="w-2 h-2 bg-blue-500 rounded-full"></span>
-              终点坐标
+          <div className="bg-white rounded-lg p-2.5 shadow-sm">
+            <h3 className="font-semibold text-xs text-blue-700 mb-1.5 flex items-center gap-1">
+              <span className="w-1.5 h-1.5 bg-blue-500 rounded-full"></span>
+              终点
             </h3>
-            <div className="space-y-2">
-              <div className="flex gap-2 items-center">
-                <label className="text-xs font-medium text-gray-600 w-5">X:</label>
+            <div className="space-y-1.5">
+              <div className="flex gap-1.5 items-center">
+                <label className="text-xs font-medium text-gray-600 w-3">X</label>
                 <input
                   type="number"
                   value={end.x}
                   onChange={(e) => handleInputChange("end", "x", e.target.value)}
-                  className="flex-1 px-3 py-1.5 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition-all"
+                  className="flex-1 px-2 py-1 text-xs border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-blue-400 focus:border-transparent transition-all"
                 />
               </div>
-              <div className="flex gap-2 items-center">
-                <label className="text-xs font-medium text-gray-600 w-5">Y:</label>
+              <div className="flex gap-1.5 items-center">
+                <label className="text-xs font-medium text-gray-600 w-3">Y</label>
                 <input
                   type="number"
                   value={end.y}
                   onChange={(e) => handleInputChange("end", "y", e.target.value)}
-                  className="flex-1 px-3 py-1.5 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition-all"
+                  className="flex-1 px-2 py-1 text-xs border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-blue-400 focus:border-transparent transition-all"
                 />
               </div>
             </div>
