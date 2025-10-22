@@ -8,6 +8,7 @@ import {
 } from "@renderer/utils/canvas";
 import { RGBAColor, rgbaToString } from "@renderer/utils/color";
 import { scanlinePolygon } from "@renderer/utils/polygon";
+import { bresenhamLine } from "@renderer/utils/line";
 
 interface PolygonRendererProps {
   vertices: Point[];
@@ -107,6 +108,7 @@ const PolygonRenderer = ({
         lineCap="round"
       />
 
+      {/* 绘制多边形填充像素 */}
       {polygonPixels.map((pixel, index) => (
         <Rect
           key={index}
@@ -117,6 +119,22 @@ const PolygonRenderer = ({
           fill={rgbaToString({ ...pixel.color, a: 0.6 * (pixel.color.a ?? 1) })}
         />
       ))}
+
+      {/* 单独绘制绘制各条线像素 */}
+      {vertices.map((start, i) => {
+        const end = vertices[(i + 1) % vertices.length];
+        const linePixelsInfo = bresenhamLine(start, end, color);
+        return linePixelsInfo.map((pixel, index) => (
+          <Rect
+            x={pixel.x}
+            y={pixel.y}
+            width={pixel.width}
+            height={pixel.height}
+            fill={rgbaToString({ ...pixel.color, a: 0.6 * (pixel.color.a ?? 1) })}
+            key={`${i}-line-pixel-${index}`}
+          />
+        ));
+      })}
 
       {/* 绘制顶点（可拖拽） */}
       {canvasVertices.map((vertex, index) => (
