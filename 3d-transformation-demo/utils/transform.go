@@ -47,7 +47,7 @@ func RotateAroundZ(theta float64) *mat.Dense {
 func RotateOverALine(lineStart mat.Vector, lineEnd mat.Vector, point mat.Vector, theta float64) (mat.Vector, error) {
 	// 检查 lineStart、lineEnd 与 point 是否都是 3 维向量
 	if lineStart.Len() != 3 || lineEnd.Len() != 3 || point.Len() != 3 {
-		panic("lineStart、lineEnd 和 point 必须都是 3 维向量")
+		return nil, fmt.Errorf("lineStart、lineEnd 和 point 必须都是 3 维向量")
 	}
 
 	// 1. 将直线平移到原点
