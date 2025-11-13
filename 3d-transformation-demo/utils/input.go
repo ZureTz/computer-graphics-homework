@@ -8,7 +8,7 @@ import (
 
 func InputVector3D() (mat.Vector, error) {
 	var x, y, z float64
-	_, err := fmt.Scanf("%f %f %f", &x, &y, &z)
+	_, err := fmt.Scanf("%f %f %f\n", &x, &y, &z)
 	if err != nil {
 		return nil, err
 	}

@@ -24,7 +24,7 @@ func main() {
 	var theta float64
 	// 提示输入旋转角度（角度制）
 	fmt.Println("请输入旋转角度（度）：")
-	if _, err := fmt.Scanf("%f", &theta); err != nil {
+	if _, err := fmt.Scanf("%f\n", &theta); err != nil {
 		fmt.Printf("读取角度时出错：%v\n", err)
 		return
 	}
