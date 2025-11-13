@@ -43,70 +43,70 @@ func RotateAroundZ(theta float64) *mat.Dense {
 	})
 }
 
-// Implementation for rotating a 3D point over a line for theta degrees
+// 实现：绕一条直线旋转 3D 点，角度为 theta（弧度）
 func RotateOverALine(lineStart mat.Vector, lineEnd mat.Vector, point mat.Vector, theta float64) (mat.Vector, error) {
-	// Check that lineStart, lineEnd, and point are all 3D vectors
+	// 检查 lineStart、lineEnd 与 point 是否都是 3 维向量
 	if lineStart.Len() != 3 || lineEnd.Len() != 3 || point.Len() != 3 {
-		panic("lineStart, lineEnd, and point must all be 3D vectors")
+		panic("lineStart、lineEnd 和 point 必须都是 3 维向量")
 	}
 
-	// 1. Move the line to the origin
+	// 1. 将直线平移到原点
 	translation := TranslationMatrix(-lineStart.AtVec(0), -lineStart.AtVec(1), -lineStart.AtVec(2))
-	fmt.Printf("Translation Matrix:\n%v\n\n", mat.Formatted(translation, mat.Prefix(""), mat.Excerpt(0)))
+	fmt.Printf("平移矩阵：\n%v\n\n", mat.Formatted(translation, mat.Prefix(""), mat.Excerpt(0)))
 
-	// 2. Rotate the line to the xOz plane
+	// 2. 将直线旋转到 xOz 平面
 
-	// First, calculate the angle between the projection of the line on the xOy plane and the x axis
+	// 先计算直线在 xOy 平面上的投影与 x 轴的夹角
 	// tan(r1) = (y1 - y0) / (x1 - x0)
 	r1Angle := math.Atan2(
 		lineEnd.AtVec(1)-lineStart.AtVec(1),
 		lineEnd.AtVec(0)-lineStart.AtVec(0),
 	)
 
-	// Then, create the rotation matrix around the z axis
+	// 然后围绕 z 轴旋转相应角度
 	rotateToXOZ := RotateAroundZ(-r1Angle)
-	fmt.Printf("Rotation to XoZ Matrix:\n%v\n\n", mat.Formatted(rotateToXOZ, mat.Prefix(""), mat.Excerpt(0)))
+	fmt.Printf("旋转到 XoZ 平面 矩阵：\n%v\n\n", mat.Formatted(rotateToXOZ, mat.Prefix(""), mat.Excerpt(0)))
 
-	// 3. Rotate the line to the z axis
+	// 3. 将直线旋转到与 z 轴重合
 
-	// First, calculate the angle between the line and the z axis
+	// 先计算直线与 z 轴的夹角
 	// tan(r2) = sqrt((x1 - x0)^2 + (y1 - y0)^2) / (z1 - z0)
 	r2Angle := math.Atan2(
 		math.Sqrt(math.Pow(lineEnd.AtVec(0)-lineStart.AtVec(0), 2)+math.Pow(lineEnd.AtVec(1)-lineStart.AtVec(1), 2)),
 		lineEnd.AtVec(2)-lineStart.AtVec(2),
 	)
 
-	// Then, create the rotation matrix around the y axis
+	// 然后围绕 y 轴旋转相应角度
 	rotateToZ := RotateAroundY(r2Angle)
-	fmt.Printf("Rotation to Z Matrix:\n%v\n\n", mat.Formatted(rotateToZ, mat.Prefix(""), mat.Excerpt(0)))
+	fmt.Printf("旋转到 Z 轴 矩阵：\n%v\n\n", mat.Formatted(rotateToZ, mat.Prefix(""), mat.Excerpt(0)))
 
-	// Combine the above transformations to the matrix preRotation
+	// 将以上变换组合为 preRotation
 	// preRotation = rotateToZ * rotateToXOZ * translation
 	preRotation := mat.NewDense(4, 4, nil)
 	preRotation.Mul(rotateToXOZ, translation)
 	preRotation.Mul(rotateToZ, preRotation)
 
-	// Inverse the preRotation matrix to get the postRotation matrix
+	// 计算 preRotation 的逆矩阵 postRotation
 	postRotation := mat.NewDense(4, 4, nil)
 	if err := postRotation.Inverse(preRotation); err != nil {
 		return nil, err
 	}
 
-	fmt.Printf("Pre-Rotation Matrix:\n%v\n\n", mat.Formatted(preRotation, mat.Prefix(""), mat.Excerpt(0)))
-	fmt.Printf("Post-Rotation Matrix:\n%v\n\n", mat.Formatted(postRotation, mat.Prefix(""), mat.Excerpt(0)))
+	fmt.Printf("预旋转矩阵：\n%v\n\n", mat.Formatted(preRotation, mat.Prefix(""), mat.Excerpt(0)))
+	fmt.Printf("预旋转矩阵的逆：\n%v\n\n", mat.Formatted(postRotation, mat.Prefix(""), mat.Excerpt(0)))
 
-	// 4. Rotate the point around the z axis for theta degrees
+	// 4. 围绕 z 轴旋转点 theta 弧度
 	rotateAroundZ := RotateAroundZ(theta)
-	fmt.Printf("Rotation Around Z Matrix:\n%v\n\n", mat.Formatted(rotateAroundZ, mat.Prefix(""), mat.Excerpt(0)))
+	fmt.Printf("绕 Z 轴旋转 矩阵：\n%v\n\n", mat.Formatted(rotateAroundZ, mat.Prefix(""), mat.Excerpt(0)))
 
-	// Combine all the transformations to a single matrix
+	// 将所有变换合并为一个矩阵
 	// transformation = postRotation * rotateAroundZ * preRotation
 	transformation := mat.NewDense(4, 4, nil)
 	transformation.Mul(rotateAroundZ, preRotation)
 	transformation.Mul(postRotation, transformation)
-	fmt.Printf("Combined Transformation Matrix:\n%v\n\n", mat.Formatted(transformation, mat.Prefix(""), mat.Excerpt(0)))
+	fmt.Printf("组合变换矩阵：\n%v\n\n", mat.Formatted(transformation, mat.Prefix(""), mat.Excerpt(0)))
 
-	// Apply the transformation to the point
+	// 将变换应用到点上
 	pointHomogeneous := mat.NewDense(4, 1, []float64{
 		point.AtVec(0),
 		point.AtVec(1),
@@ -121,8 +121,8 @@ func RotateOverALine(lineStart mat.Vector, lineEnd mat.Vector, point mat.Vector,
 		result.At(0, 0),
 		result.At(1, 0),
 		result.At(2, 0),
-	}) 
+	})
 
-	// Return the transformed point
+	// 返回变换后的点
 	return resultVec, nil
 }
