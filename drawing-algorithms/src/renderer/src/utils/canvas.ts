@@ -6,6 +6,13 @@ export const canvasUnitLengthHalf = canvasUnitLength / 2;
 
 export type Point = { x: number; y: number };
 
+export type Rectangle = {
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+};
+
 // Transform a point from basic 40x40 coordinate system (x-right y-up) to canvas coordinate system
 export function logicalToCanvasPoint(p: Point): Point {
   return {

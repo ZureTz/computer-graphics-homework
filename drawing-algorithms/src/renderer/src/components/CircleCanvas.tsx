@@ -1,22 +1,24 @@
+import { useEffect, useRef, useState } from "react";
 import useImage from "use-image";
-import { Stage, Layer, Image } from "react-konva";
+import type Konva from "konva";
+import { KonvaEventObject } from "konva/lib/Node";
+import { Stage, Layer, Image, Transformer } from "react-konva";
 
 import grid from "@renderer/assets/grid-40.svg";
 import { canvasLength, Point } from "@renderer/utils/canvas";
-import { useState } from "react";
 import CircleRenderer from "./CircleRenderer";
 
 const CircleCanvas = (): React.JSX.Element => {
   const [gridImage] = useImage(grid);
   const [circleCenter, setCircleCenter] = useState<Point>({ x: 0, y: 0 });
   const [radius, setRadius] = useState<number>(10);
+  const [isSelected, setIsSelected] = useState(false);
+
+  const circleGroupRef = useRef<Konva.Group>(null);
+  const transformerRef = useRef<Konva.Transformer>(null);
 
   const handleCenterChange = (newCenter: Point): void => {
     setCircleCenter(newCenter);
-  };
-
-  const handleRadiusChange = (newRadius: number): void => {
-    setRadius(newRadius);
   };
 
   const handleInputChange = (type: "centerX" | "centerY" | "radius", value: string): void => {
@@ -29,6 +31,36 @@ const CircleCanvas = (): React.JSX.Element => {
       setRadius(numValue);
     }
   };
+
+  const handleTransform = (newCenter: Point, newRadius: number): void => {
+    setCircleCenter(newCenter);
+    setRadius(newRadius);
+  };
+
+  const handleStagePointerDown = (e: KonvaEventObject<MouseEvent | TouchEvent>): void => {
+    const stage = e.target.getStage();
+    if (!stage) return;
+
+    const clickedOnEmpty = e.target === stage;
+    const clickedTransformerHandle = e.target.getParent()?.className === "Transformer";
+
+    if (clickedOnEmpty && !clickedTransformerHandle) {
+      setIsSelected(false);
+    }
+  };
+
+  useEffect(() => {
+    const transformer = transformerRef.current;
+    if (!transformer) return;
+
+    if (isSelected && circleGroupRef.current) {
+      transformer.nodes([circleGroupRef.current]);
+      transformer.getLayer()?.batchDraw();
+      transformer.forceUpdate?.();
+    } else {
+      transformer.nodes([]);
+    }
+  }, [isSelected, circleCenter, radius]);
 
   return (
     <div className="flex gap-6 items-start">
@@ -82,15 +114,37 @@ const CircleCanvas = (): React.JSX.Element => {
 
       {/* Canvas */}
       <div className="rounded-xl overflow-hidden shadow-lg border-2 border-gray-200">
-        <Stage width={canvasLength} height={canvasLength}>
+        <Stage
+          width={canvasLength}
+          height={canvasLength}
+          onMouseDown={handleStagePointerDown}
+          onTouchStart={handleStagePointerDown}
+        >
           <Layer>
-            <Image image={gridImage} x={0} y={0} width={canvasLength} height={canvasLength} />
+            <Image
+              image={gridImage}
+              x={0}
+              y={0}
+              width={canvasLength}
+              height={canvasLength}
+              listening={false}
+            />
             <CircleRenderer
+              ref={circleGroupRef}
               center={circleCenter}
               radius={radius}
               color={{ r: 220, g: 38, b: 38, a: 1 }}
               onCenterChange={handleCenterChange}
-              onRadiusChange={handleRadiusChange}
+              onSelect={() => setIsSelected(true)}
+              onTransform={handleTransform}
+              isSelected={isSelected}
+            />
+            <Transformer
+              ref={transformerRef}
+              rotateEnabled={false}
+              centeredScaling
+              keepRatio
+              enabledAnchors={["top-left", "top-right", "bottom-left", "bottom-right"]}
             />
           </Layer>
         </Stage>

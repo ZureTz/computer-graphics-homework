@@ -1,13 +1,7 @@
 import { Point } from "./canvas";
 import { RGBAColor } from "./color";
 import { getPixel, PixelInfo, removeDuplicatePixels } from "./pixels";
-import {
-  negateVec2,
-  newVec2FromPoints,
-  reflectVec2AroundX,
-  reflectVec2AroundY,
-  Vec2
-} from "./vec2";
+import { rotateVec2, Vec2 } from "./vec2";
 
 /**
  * 获取椭圆上一个点的4个对称点
@@ -17,25 +11,12 @@ import {
  * @param offset 从中心到基准点的偏移向量
  * @returns 包含4个对称点的数组
  */
-function getSymmetricEllipsePoints(center: Point, offset: Vec2): Point[] {
-  // 计算基准点坐标
-  const basePoint = { x: center.x + offset.x, y: center.y + offset.y };
-
-  // 从中心到基准点的向量
-  const baseVector = newVec2FromPoints(center, basePoint);
-  // 关于X轴对称（上下翻转）
-  const xReflected = reflectVec2AroundX(baseVector);
-  // 关于Y轴对称（左右翻转）
-  const yReflected = reflectVec2AroundY(baseVector);
-  // 关于原点对称（180度旋转）
-  const negated = negateVec2(baseVector);
-
+function getSymmetricEllipseOffsets(offset: Vec2): Vec2[] {
   return [
-    // 原始点及其三个镜像（关于X轴、Y轴、原点）
-    basePoint,
-    { x: center.x + xReflected.x, y: center.y + xReflected.y },
-    { x: center.x + yReflected.x, y: center.y + yReflected.y },
-    { x: center.x + negated.x, y: center.y + negated.y }
+    { x: offset.x, y: offset.y },
+    { x: offset.x, y: -offset.y },
+    { x: -offset.x, y: offset.y },
+    { x: -offset.x, y: -offset.y }
   ];
 }
 
@@ -53,7 +34,8 @@ export function midpointEllipse(
   center: Point,
   radiusX: number,
   radiusY: number,
-  color: RGBAColor
+  color: RGBAColor,
+  rotationRad = 0
 ): PixelInfo[] {
   const pixels: PixelInfo[] = [];
 
@@ -72,9 +54,12 @@ export function midpointEllipse(
   // 在区域1中，当 dx < dy 时继续（斜率绝对值 < 1）
   while (dx < dy) {
     // 绘制当前点的4个对称点
-    const symmetricPoints = getSymmetricEllipsePoints(center, { x, y });
-    for (const point of symmetricPoints) {
-      pixels.push(getPixel(point, color));
+    const symmetricOffsets = getSymmetricEllipseOffsets({ x, y });
+    for (const offset of symmetricOffsets) {
+      const rotated = rotateVec2(offset, -rotationRad);
+      const rotatedPoint = { x: center.x + rotated.x, y: center.y + rotated.y };
+      const snappedPoint = { x: Math.round(rotatedPoint.x), y: Math.round(rotatedPoint.y) };
+      pixels.push(getPixel(snappedPoint, color));
     }
 
     // 根据判别参数决定下一个点的位置
@@ -103,9 +88,12 @@ export function midpointEllipse(
   // 在区域2中，从当前y值一直到y=0
   while (y >= 0) {
     // 绘制当前点的4个对称点
-    const symmetricPoints = getSymmetricEllipsePoints(center, { x, y });
-    for (const point of symmetricPoints) {
-      pixels.push(getPixel(point, color));
+    const symmetricOffsets = getSymmetricEllipseOffsets({ x, y });
+    for (const offset of symmetricOffsets) {
+      const rotated = rotateVec2(offset, -rotationRad);
+      const rotatedPoint = { x: center.x + rotated.x, y: center.y + rotated.y };
+      const snappedPoint = { x: Math.round(rotatedPoint.x), y: Math.round(rotatedPoint.y) };
+      pixels.push(getPixel(snappedPoint, color));
     }
 
     // 根据判别参数决定下一个点的位置

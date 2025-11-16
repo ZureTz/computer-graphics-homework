@@ -9,9 +9,12 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "cSpell.words": [
+    "Barsky",
     "Bresenham",
+    "Hodgman",
     "Jesko",
     "konva",
+    "liang",
     "scanline",
     "wuxiaolin",
     "Xiaolin"
