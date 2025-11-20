@@ -5,43 +5,52 @@ button:hover {
   cursor: pointer;
 }
 
-/* 自定义滚动条样式 */
+/* Global Scrollbar Styling for Glassmorphism */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  backdrop-filter: blur(4px);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.4);
+}
+
+/* Custom scrollbar class for specific containers if needed */
 .custom-scrollbar {
   scrollbar-width: thin;
-  scrollbar-color: rgba(134, 239, 172, 0.4) #f0fdf4;
+  scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
 }
 
-/* Webkit浏览器（Chrome, Safari, Edge）的自定义滚动条 */
-.custom-scrollbar::-webkit-scrollbar {
-  width: 8px;
+/* Global styles */
+body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden; /* Prevent body scroll, handle in app */
+  background: #0f172a; /* Fallback dark bg */
+  font-family:
+    "Inter",
+    system-ui,
+    -apple-system,
+    sans-serif;
+  color: #e2e8f0;
 }
 
-.custom-scrollbar::-webkit-scrollbar-track {
-  background: #f0fdf4;
-  border-radius: 4px;
-}
-
-.custom-scrollbar::-webkit-scrollbar-thumb {
-  background: rgba(134, 239, 172, 0.5);
-  border-radius: 4px;
-  transition: background 0.2s;
-}
-
-.custom-scrollbar::-webkit-scrollbar-thumb:hover {
-  background: rgba(134, 239, 172, 0.7);
-}
-
-.custom-scrollbar::-webkit-scrollbar-thumb:active {
-  background: rgba(134, 239, 172, 0.9);
-}
-
-/* 全局样式优化 */
 * {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* 输入框聚焦时的动画 */
+/* Input focus animation */
 input:focus {
   transform: scale(1.02);
   transition: transform 0.15s ease-in-out;

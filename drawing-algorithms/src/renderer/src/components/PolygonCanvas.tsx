@@ -204,21 +204,21 @@ const PolygonCanvas = (): React.JSX.Element => {
   }, [isSelected]);
 
   return (
-    <div className="flex gap-6 items-start">
+    <div className="flex gap-6 items-center h-full">
       {/* Control Panel */}
       <div
-        className="flex flex-col gap-3 p-4 bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl border border-green-200 shadow-sm w-[240px]"
+        className="flex flex-col gap-3 p-4 bg-white/5 backdrop-blur-md rounded-xl border border-white/10 shadow-xl w-[240px] h-full overflow-y-auto custom-scrollbar"
         style={{ maxHeight: `${canvasLength}px` }}
       >
         <div className="mb-1 flex-shrink-0">
-          <h2 className="text-base font-bold text-gray-800 mb-0.5">多边形填充</h2>
-          <p className="text-xs text-gray-600">扫描线算法</p>
+          <h2 className="text-base font-bold text-white mb-0.5">多边形填充</h2>
+          <p className="text-xs text-slate-400">扫描线算法</p>
         </div>
 
         {/* 矩形模式切换 */}
-        <div className="bg-white rounded-lg p-2.5 shadow-sm flex-shrink-0">
-          <h3 className="font-semibold text-xs text-green-700 mb-2 flex items-center gap-1">
-            <span className="w-1.5 h-1.5 bg-blue-500 rounded-full"></span>
+        <div className="bg-white/5 rounded-lg p-3 border border-white/5 flex-shrink-0">
+          <h3 className="font-semibold text-xs text-blue-300 mb-2 flex items-center gap-1">
+            <span className="w-1.5 h-1.5 bg-blue-400 rounded-full shadow-[0_0_5px_rgba(96,165,250,0.5)]"></span>
             裁切模式
           </h3>
           <label className="flex items-center gap-2 cursor-pointer group">
@@ -234,21 +234,21 @@ const PolygonCanvas = (): React.JSX.Element => {
                   setRectangle(null);
                 }
               }}
-              className="w-3.5 h-3.5 text-blue-600 focus:ring-1 focus:ring-blue-400 cursor-pointer rounded"
+              className="w-3.5 h-3.5 text-blue-500 bg-white/10 border-white/20 focus:ring-1 focus:ring-blue-400 cursor-pointer rounded"
             />
-            <span className="text-xs text-gray-700 group-hover:text-blue-600 transition-colors">
+            <span className="text-xs text-slate-300 group-hover:text-blue-400 transition-colors">
               矩形裁切模式
             </span>
           </label>
           {isRectangleMode && (
-            <p className="text-xs text-blue-600 mt-1.5 pl-5">
+            <p className="text-xs text-blue-400 mt-1.5 pl-5">
               {tempRectPoint ? "点击第二个点" : "点击第一个点"}
             </p>
           )}
           {isRectangleMode && rectangle && (
             <button
               onClick={handleClipping}
-              className="mt-2 w-full px-3 py-1.5 text-xs font-medium text-white bg-blue-600 hover:bg-blue-700 rounded transition-colors"
+              className="mt-2 w-full px-3 py-1.5 text-xs font-medium text-white bg-blue-600/80 hover:bg-blue-500 rounded transition-colors shadow-lg shadow-blue-900/20"
             >
               裁剪多边形
             </button>
@@ -256,15 +256,15 @@ const PolygonCanvas = (): React.JSX.Element => {
         </div>
 
         {/* 顶点列表 */}
-        <div className="bg-white rounded-lg p-2.5 shadow-sm border-2 border-green-100 flex-1 flex flex-col overflow-hidden">
+        <div className="bg-white/5 rounded-lg p-3 border border-white/5 flex-1 flex flex-col overflow-hidden">
           <div className="flex items-center justify-between mb-2 flex-shrink-0">
-            <h3 className="font-semibold text-xs text-green-700 flex items-center gap-1">
-              <span className="w-1.5 h-1.5 bg-green-500 rounded-full"></span>
+            <h3 className="font-semibold text-xs text-green-300 flex items-center gap-1">
+              <span className="w-1.5 h-1.5 bg-green-400 rounded-full shadow-[0_0_5px_rgba(74,222,128,0.5)]"></span>
               顶点 ({vertices.length})
             </h3>
             <button
               onClick={handleAddVertex}
-              className="px-1.5 py-0.5 bg-green-500 hover:bg-green-600 text-white text-xs rounded transition-all flex items-center gap-0.5"
+              className="px-1.5 py-0.5 bg-green-600/80 hover:bg-green-500 text-white text-xs rounded transition-all flex items-center gap-0.5 shadow-lg shadow-green-900/20"
             >
               <span className="text-sm font-bold">+</span>
               <span>添加</span>
@@ -272,41 +272,41 @@ const PolygonCanvas = (): React.JSX.Element => {
           </div>
 
           {/* 顶点滚动列表 - 自定义滚动条 */}
-          <div className="flex-1 overflow-y-auto space-y-1.5 custom-scrollbar">
+          <div className="flex-1 overflow-y-auto space-y-1.5 custom-scrollbar pr-1">
             {vertices.length === 0 ? (
-              <p className="text-xs text-gray-400 text-center py-4">暂无顶点</p>
+              <p className="text-xs text-slate-500 text-center py-4">暂无顶点</p>
             ) : (
               vertices.map((vertex, index) => (
                 <div
                   key={index}
-                  className="flex items-start gap-1.5 p-1.5 bg-gray-50 rounded border border-gray-200 hover:border-green-300 transition-colors"
+                  className="flex items-start gap-1.5 p-1.5 bg-black/20 rounded border border-white/5 hover:border-green-400/50 transition-colors"
                 >
-                  <span className="text-xs font-semibold text-gray-600 min-w-[16px] pt-0.5">
+                  <span className="text-xs font-semibold text-slate-400 min-w-[16px] pt-0.5">
                     {index + 1}
                   </span>
                   <div className="flex flex-col gap-1 flex-1 min-w-0">
                     <div className="flex items-center gap-1">
-                      <label className="text-xs text-gray-500 w-4 flex-shrink-0">X</label>
+                      <label className="text-xs text-slate-500 w-4 flex-shrink-0">X</label>
                       <input
                         type="number"
                         value={vertex.x}
                         onChange={(e) => handleVertexChange(index, "x", e.target.value)}
-                        className="w-full px-1.5 py-0.5 text-xs border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-green-400 focus:border-transparent transition-all"
+                        className="w-full px-1.5 py-0.5 text-xs bg-black/20 border border-white/10 text-slate-200 rounded focus:outline-none focus:ring-1 focus:ring-green-400 focus:border-transparent transition-all"
                       />
                     </div>
                     <div className="flex items-center gap-1">
-                      <label className="text-xs text-gray-500 w-4 flex-shrink-0">Y</label>
+                      <label className="text-xs text-slate-500 w-4 flex-shrink-0">Y</label>
                       <input
                         type="number"
                         value={vertex.y}
                         onChange={(e) => handleVertexChange(index, "y", e.target.value)}
-                        className="w-full px-1.5 py-0.5 text-xs border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-green-400 focus:border-transparent transition-all"
+                        className="w-full px-1.5 py-0.5 text-xs bg-black/20 border border-white/10 text-slate-200 rounded focus:outline-none focus:ring-1 focus:ring-green-400 focus:border-transparent transition-all"
                       />
                     </div>
                   </div>
                   <button
                     onClick={() => handleRemoveVertex(index)}
-                    className="px-1.5 py-0.5 bg-red-400 hover:bg-red-500 text-white text-xs rounded transition-all leading-none flex-shrink-0 self-start mt-0.5"
+                    className="px-1.5 py-0.5 bg-red-500/80 hover:bg-red-400 text-white text-xs rounded transition-all leading-none flex-shrink-0 self-start mt-0.5"
                     title="删除顶点"
                   >
                     ×
@@ -318,35 +318,37 @@ const PolygonCanvas = (): React.JSX.Element => {
         </div>
 
         {/* 帮助提示 */}
-        <div className="bg-white rounded-lg p-2.5 shadow-sm border-2 border-green-100 flex-shrink-0">
+        <div className="bg-white/5 rounded-lg p-3 border border-white/5 flex-shrink-0">
           <button
             onClick={() => setShowHelp(!showHelp)}
-            className="w-full flex items-center justify-between text-xs font-semibold text-green-700 hover:text-green-800 transition-colors"
+            className="w-full flex items-center justify-between text-xs font-semibold text-green-300 hover:text-green-200 transition-colors"
           >
             <span className="flex items-center gap-1">
-              <span className="w-1.5 h-1.5 bg-green-500 rounded-full"></span>
+              <span className="w-1.5 h-1.5 bg-green-400 rounded-full shadow-[0_0_5px_rgba(74,222,128,0.5)]"></span>
               操作提示
             </span>
             <span className="text-lg leading-none">{showHelp ? "−" : "+"}</span>
           </button>
           {showHelp && (
-            <ul className="text-xs text-gray-600 leading-relaxed space-y-0.5 mt-2 pl-3">
+            <ul className="text-xs text-slate-400 leading-relaxed space-y-0.5 mt-2 pl-3">
               <li>• 点击画布添加顶点</li>
               <li>• 编辑坐标或拖拽顶点</li>
               <li>• 点击多边形后可变换</li>
               <li>
-                • 按 <kbd className="px-1 py-0.5 bg-gray-200 rounded text-xs">ESC</kbd> 取消
+                • 按{" "}
+                <kbd className="px-1 py-0.5 bg-white/10 rounded text-xs text-slate-300">ESC</kbd>{" "}
+                取消
               </li>
             </ul>
           )}
           {!showHelp && (
-            <p className="text-xs text-gray-500 mt-1.5">点击画布添加顶点，编辑坐标调整位置</p>
+            <p className="text-xs text-slate-500 mt-1.5">点击画布添加顶点，编辑坐标调整位置</p>
           )}
         </div>
       </div>
 
       {/* Canvas */}
-      <div className="rounded-xl overflow-hidden shadow-lg border-2 border-gray-200">
+      <div className="rounded-xl overflow-hidden shadow-2xl border border-white/10 bg-black/20 backdrop-blur-sm">
         <Stage width={canvasLength} height={canvasLength} onClick={handleCanvasClick}>
           <Layer>
             <Image image={gridImage} x={0} y={0} width={canvasLength} height={canvasLength} />

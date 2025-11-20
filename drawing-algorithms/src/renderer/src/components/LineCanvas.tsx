@@ -146,19 +146,21 @@ const LineCanvas = (): React.JSX.Element => {
   };
 
   return (
-    <div className="flex gap-6 items-start">
+    <div className="flex gap-6 items-center h-full">
       {/* Control Panel */}
-      <div className="flex flex-col gap-3 p-4 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl border border-blue-200 shadow-sm w-[240px]">
+      <div
+        className="flex flex-col gap-3 p-4 bg-white/5 backdrop-blur-md rounded-xl border border-white/10 shadow-xl w-[240px] h-full overflow-y-auto custom-scrollbar"
+        style={{ maxHeight: `${canvasLength}px` }}
+      >
         <div className="mb-1">
-          <h2 className="text-base font-bold text-gray-800 mb-0.5">直线绘制</h2>
-          <p className="text-xs text-gray-600">选择算法并拖动或输入坐标</p>
+          <h2 className="text-base font-bold text-white mb-0.5">直线绘制</h2>
+          <p className="text-xs text-slate-400">选择算法并拖动或输入坐标</p>
         </div>
 
-        {/* Algorithm Selection */}
         {/* Rectangle Mode Toggle */}
-        <div className="bg-white rounded-lg p-2.5 shadow-sm">
-          <h3 className="font-semibold text-xs text-blue-700 mb-2 flex items-center gap-1">
-            <span className="w-1.5 h-1.5 bg-green-500 rounded-full"></span>
+        <div className="bg-white/5 rounded-lg p-3 border border-white/5">
+          <h3 className="font-semibold text-xs text-blue-300 mb-2 flex items-center gap-1">
+            <span className="w-1.5 h-1.5 bg-green-400 rounded-full shadow-[0_0_5px_rgba(74,222,128,0.5)]"></span>
             裁切模式
           </h3>
           <label className="flex items-center gap-2 cursor-pointer group">
@@ -176,33 +178,33 @@ const LineCanvas = (): React.JSX.Element => {
                 setTempRectPoint(null);
                 setRectangle(null);
               }}
-              className="w-3.5 h-3.5 text-green-600 focus:ring-1 focus:ring-green-400 cursor-pointer rounded"
+              className="w-3.5 h-3.5 text-green-500 bg-white/10 border-white/20 focus:ring-1 focus:ring-green-400 cursor-pointer rounded"
             />
-            <span className="text-xs text-gray-700 group-hover:text-green-600 transition-colors">
+            <span className="text-xs text-slate-300 group-hover:text-green-400 transition-colors">
               矩形裁切模式
             </span>
           </label>
           {isRectangleMode && (
-            <p className="text-xs text-green-600 mt-1.5 pl-5">
+            <p className="text-xs text-green-400 mt-1.5 pl-5">
               {tempRectPoint ? "点击第二个点" : "点击第一个点"}
             </p>
           )}
           {isRectangleMode && rectangle && (
             <button
               onClick={handleClipping}
-              className="mt-2 w-full px-3 py-1.5 text-xs font-medium text-white bg-green-600 hover:bg-green-700 rounded transition-colors"
+              className="mt-2 w-full px-3 py-1.5 text-xs font-medium text-white bg-green-600/80 hover:bg-green-500 rounded transition-colors shadow-lg shadow-green-900/20"
             >
               裁剪直线
             </button>
           )}
         </div>
 
-        <div className="bg-white rounded-lg p-2.5 shadow-sm">
-          <h3 className="font-semibold text-xs text-blue-700 mb-2 flex items-center gap-1">
-            <span className="w-1.5 h-1.5 bg-blue-500 rounded-full"></span>
+        <div className="bg-white/5 rounded-lg p-3 border border-white/5">
+          <h3 className="font-semibold text-xs text-blue-300 mb-2 flex items-center gap-1">
+            <span className="w-1.5 h-1.5 bg-blue-400 rounded-full shadow-[0_0_5px_rgba(96,165,250,0.5)]"></span>
             算法
           </h3>
-          <div className="space-y-1.5">
+          <div className="space-y-2">
             <label className="flex items-center gap-2 cursor-pointer group">
               <input
                 type="radio"
@@ -210,9 +212,9 @@ const LineCanvas = (): React.JSX.Element => {
                 value="bresenham"
                 checked={algorithm === "bresenham"}
                 onChange={(e) => setAlgorithm(e.target.value as "bresenham" | "dda" | "wu")}
-                className="w-3.5 h-3.5 text-blue-600 focus:ring-1 focus:ring-blue-400 cursor-pointer"
+                className="w-3.5 h-3.5 text-blue-500 bg-white/10 border-white/20 focus:ring-1 focus:ring-blue-400 cursor-pointer"
               />
-              <span className="text-xs text-gray-700 group-hover:text-blue-600 transition-colors">
+              <span className="text-xs text-slate-300 group-hover:text-blue-400 transition-colors">
                 Bresenham
               </span>
             </label>
@@ -223,9 +225,9 @@ const LineCanvas = (): React.JSX.Element => {
                 value="dda"
                 checked={algorithm === "dda"}
                 onChange={(e) => setAlgorithm(e.target.value as "bresenham" | "dda" | "wu")}
-                className="w-3.5 h-3.5 text-blue-600 focus:ring-1 focus:ring-blue-400 cursor-pointer"
+                className="w-3.5 h-3.5 text-blue-500 bg-white/10 border-white/20 focus:ring-1 focus:ring-blue-400 cursor-pointer"
               />
-              <span className="text-xs text-gray-700 group-hover:text-blue-600 transition-colors">
+              <span className="text-xs text-slate-300 group-hover:text-blue-400 transition-colors">
                 DDA
               </span>
             </label>
@@ -236,9 +238,9 @@ const LineCanvas = (): React.JSX.Element => {
                 value="wu"
                 checked={algorithm === "wu"}
                 onChange={(e) => setAlgorithm(e.target.value as "bresenham" | "dda" | "wu")}
-                className="w-3.5 h-3.5 text-blue-600 focus:ring-1 focus:ring-blue-400 cursor-pointer"
+                className="w-3.5 h-3.5 text-blue-500 bg-white/10 border-white/20 focus:ring-1 focus:ring-blue-400 cursor-pointer"
               />
-              <span className="text-xs text-gray-700 group-hover:text-blue-600 transition-colors">
+              <span className="text-xs text-slate-300 group-hover:text-blue-400 transition-colors">
                 吴小林
               </span>
             </label>
@@ -246,55 +248,55 @@ const LineCanvas = (): React.JSX.Element => {
         </div>
 
         <div className="space-y-2.5">
-          <div className="bg-white rounded-lg p-2.5 shadow-sm">
-            <h3 className="font-semibold text-xs text-blue-700 mb-1.5 flex items-center gap-1">
-              <span className="w-1.5 h-1.5 bg-blue-500 rounded-full"></span>
+          <div className="bg-white/5 rounded-lg p-3 border border-white/5">
+            <h3 className="font-semibold text-xs text-blue-300 mb-1.5 flex items-center gap-1">
+              <span className="w-1.5 h-1.5 bg-blue-400 rounded-full shadow-[0_0_5px_rgba(96,165,250,0.5)]"></span>
               起点
             </h3>
             <div className="space-y-1.5">
               <div className="flex gap-1.5 items-center">
-                <label className="text-xs font-medium text-gray-600 w-3">X</label>
+                <label className="text-xs font-medium text-slate-400 w-3">X</label>
                 <input
                   type="number"
                   value={start.x}
                   onChange={(e) => handleInputChange("start", "x", e.target.value)}
-                  className="flex-1 px-2 py-1 text-xs border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-blue-400 focus:border-transparent transition-all"
+                  className="flex-1 px-2 py-1 text-xs bg-black/20 border border-white/10 text-slate-200 rounded focus:outline-none focus:ring-1 focus:ring-blue-400 focus:border-transparent transition-all"
                 />
               </div>
               <div className="flex gap-1.5 items-center">
-                <label className="text-xs font-medium text-gray-600 w-3">Y</label>
+                <label className="text-xs font-medium text-slate-400 w-3">Y</label>
                 <input
                   type="number"
                   value={start.y}
                   onChange={(e) => handleInputChange("start", "y", e.target.value)}
-                  className="flex-1 px-2 py-1 text-xs border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-blue-400 focus:border-transparent transition-all"
+                  className="flex-1 px-2 py-1 text-xs bg-black/20 border border-white/10 text-slate-200 rounded focus:outline-none focus:ring-1 focus:ring-blue-400 focus:border-transparent transition-all"
                 />
               </div>
             </div>
           </div>
 
-          <div className="bg-white rounded-lg p-2.5 shadow-sm">
-            <h3 className="font-semibold text-xs text-blue-700 mb-1.5 flex items-center gap-1">
-              <span className="w-1.5 h-1.5 bg-blue-500 rounded-full"></span>
+          <div className="bg-white/5 rounded-lg p-3 border border-white/5">
+            <h3 className="font-semibold text-xs text-blue-300 mb-1.5 flex items-center gap-1">
+              <span className="w-1.5 h-1.5 bg-blue-400 rounded-full shadow-[0_0_5px_rgba(96,165,250,0.5)]"></span>
               终点
             </h3>
             <div className="space-y-1.5">
               <div className="flex gap-1.5 items-center">
-                <label className="text-xs font-medium text-gray-600 w-3">X</label>
+                <label className="text-xs font-medium text-slate-400 w-3">X</label>
                 <input
                   type="number"
                   value={end.x}
                   onChange={(e) => handleInputChange("end", "x", e.target.value)}
-                  className="flex-1 px-2 py-1 text-xs border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-blue-400 focus:border-transparent transition-all"
+                  className="flex-1 px-2 py-1 text-xs bg-black/20 border border-white/10 text-slate-200 rounded focus:outline-none focus:ring-1 focus:ring-blue-400 focus:border-transparent transition-all"
                 />
               </div>
               <div className="flex gap-1.5 items-center">
-                <label className="text-xs font-medium text-gray-600 w-3">Y</label>
+                <label className="text-xs font-medium text-slate-400 w-3">Y</label>
                 <input
                   type="number"
                   value={end.y}
                   onChange={(e) => handleInputChange("end", "y", e.target.value)}
-                  className="flex-1 px-2 py-1 text-xs border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-blue-400 focus:border-transparent transition-all"
+                  className="flex-1 px-2 py-1 text-xs bg-black/20 border border-white/10 text-slate-200 rounded focus:outline-none focus:ring-1 focus:ring-blue-400 focus:border-transparent transition-all"
                 />
               </div>
             </div>
@@ -303,7 +305,7 @@ const LineCanvas = (): React.JSX.Element => {
       </div>
 
       {/* Canvas */}
-      <div className="rounded-xl overflow-hidden shadow-lg border-2 border-gray-200">
+      <div className="rounded-xl overflow-hidden shadow-2xl border border-white/10 bg-black/20 backdrop-blur-sm">
         <Stage
           width={canvasLength}
           height={canvasLength}

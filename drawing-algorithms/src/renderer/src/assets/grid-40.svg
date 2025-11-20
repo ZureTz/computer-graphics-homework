@@ -1,8 +1,8 @@
 <svg width="800" height="800" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif">
   <style>
-    .grid-line { stroke: #ccc; stroke-width: 1; }
-    .axis-line { stroke: #333; stroke-width: 2; }
-    .label { font-size: 15px; }
+    .grid-line { stroke: rgba(255, 255, 255, 0.1); stroke-width: 1; }
+    .axis-line { stroke: rgba(255, 255, 255, 0.4); stroke-width: 2; }
+    .label { font-size: 15px; fill: rgba(255, 255, 255, 0.5); }
     .x-label { text-anchor: middle; dominant-baseline: baseline; }
     .y-label { text-anchor: start; dominant-baseline: middle; }
   </style>

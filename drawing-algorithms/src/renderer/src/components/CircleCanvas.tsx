@@ -63,57 +63,60 @@ const CircleCanvas = (): React.JSX.Element => {
   }, [isSelected, circleCenter, radius]);
 
   return (
-    <div className="flex gap-6 items-start">
+    <div className="flex gap-6 items-center h-full">
       {/* Control Panel */}
-      <div className="flex flex-col gap-3 p-4 bg-gradient-to-br from-red-50 to-pink-50 rounded-xl border border-red-200 shadow-sm w-[240px]">
+      <div
+        className="flex flex-col gap-3 p-4 bg-white/5 backdrop-blur-md rounded-xl border border-white/10 shadow-xl w-[240px] h-full overflow-y-auto custom-scrollbar"
+        style={{ maxHeight: `${canvasLength}px` }}
+      >
         <div className="mb-1">
-          <h2 className="text-base font-bold text-gray-800 mb-0.5">中点画圆</h2>
-          <p className="text-xs text-gray-600">Bresenham 圆算法</p>
+          <h2 className="text-base font-bold text-white mb-0.5">中点画圆</h2>
+          <p className="text-xs text-slate-400">Bresenham 圆算法</p>
         </div>
 
-        <div className="bg-white rounded-lg p-2.5 shadow-sm">
-          <h3 className="font-semibold text-xs text-red-700 mb-1.5 flex items-center gap-1">
-            <span className="w-1.5 h-1.5 bg-red-500 rounded-full"></span>
+        <div className="bg-white/5 rounded-lg p-3 border border-white/5">
+          <h3 className="font-semibold text-xs text-red-300 mb-1.5 flex items-center gap-1">
+            <span className="w-1.5 h-1.5 bg-red-400 rounded-full shadow-[0_0_5px_rgba(248,113,113,0.5)]"></span>
             圆心
           </h3>
           <div className="space-y-1.5">
             <div className="flex gap-1.5 items-center">
-              <label className="text-xs font-medium text-gray-600 w-3">X</label>
+              <label className="text-xs font-medium text-slate-400 w-3">X</label>
               <input
                 type="number"
                 value={circleCenter.x}
                 onChange={(e) => handleInputChange("centerX", e.target.value)}
-                className="flex-1 px-2 py-1 text-xs border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-red-400 focus:border-transparent transition-all"
+                className="flex-1 px-2 py-1 text-xs bg-black/20 border border-white/10 text-slate-200 rounded focus:outline-none focus:ring-1 focus:ring-red-400 focus:border-transparent transition-all"
               />
             </div>
             <div className="flex gap-1.5 items-center">
-              <label className="text-xs font-medium text-gray-600 w-3">Y</label>
+              <label className="text-xs font-medium text-slate-400 w-3">Y</label>
               <input
                 type="number"
                 value={circleCenter.y}
                 onChange={(e) => handleInputChange("centerY", e.target.value)}
-                className="flex-1 px-2 py-1 text-xs border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-red-400 focus:border-transparent transition-all"
+                className="flex-1 px-2 py-1 text-xs bg-black/20 border border-white/10 text-slate-200 rounded focus:outline-none focus:ring-1 focus:ring-red-400 focus:border-transparent transition-all"
               />
             </div>
           </div>
         </div>
 
-        <div className="bg-white rounded-lg p-2.5 shadow-sm">
-          <h3 className="font-semibold text-xs text-red-700 mb-1.5 flex items-center gap-1">
-            <span className="w-1.5 h-1.5 bg-red-500 rounded-full"></span>
+        <div className="bg-white/5 rounded-lg p-3 border border-white/5">
+          <h3 className="font-semibold text-xs text-red-300 mb-1.5 flex items-center gap-1">
+            <span className="w-1.5 h-1.5 bg-red-400 rounded-full shadow-[0_0_5px_rgba(248,113,113,0.5)]"></span>
             半径
           </h3>
           <input
             type="number"
             value={radius}
             onChange={(e) => handleInputChange("radius", e.target.value)}
-            className="w-full px-2 py-1 text-xs border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-red-400 focus:border-transparent transition-all"
+            className="w-full px-2 py-1 text-xs bg-black/20 border border-white/10 text-slate-200 rounded focus:outline-none focus:ring-1 focus:ring-red-400 focus:border-transparent transition-all"
           />
         </div>
       </div>
 
       {/* Canvas */}
-      <div className="rounded-xl overflow-hidden shadow-lg border-2 border-gray-200">
+      <div className="rounded-xl overflow-hidden shadow-2xl border border-white/10 bg-black/20 backdrop-blur-sm">
         <Stage
           width={canvasLength}
           height={canvasLength}

@@ -81,71 +81,74 @@ const EllipseCanvas = (): React.JSX.Element => {
   }, [isSelected, ellipseCenter, radiusX, radiusY, rotation]);
 
   return (
-    <div className="flex gap-6 items-start">
+    <div className="flex gap-6 items-center h-full">
       {/* Control Panel */}
-      <div className="flex flex-col gap-3 p-4 bg-gradient-to-br from-purple-50 to-violet-50 rounded-xl border border-purple-200 shadow-sm w-[240px]">
+      <div
+        className="flex flex-col gap-3 p-4 bg-white/5 backdrop-blur-md rounded-xl border border-white/10 shadow-xl w-[240px] h-full overflow-y-auto custom-scrollbar"
+        style={{ maxHeight: `${canvasLength}px` }}
+      >
         <div className="mb-1">
-          <h2 className="text-base font-bold text-gray-800 mb-0.5">中点画椭圆</h2>
-          <p className="text-xs text-gray-600">拖动或调整长短轴</p>
+          <h2 className="text-base font-bold text-white mb-0.5">中点画椭圆</h2>
+          <p className="text-xs text-slate-400">拖动或调整长短轴</p>
         </div>
 
-        <div className="bg-white rounded-lg p-2.5 shadow-sm">
-          <h3 className="font-semibold text-xs text-purple-700 mb-1.5 flex items-center gap-1">
-            <span className="w-1.5 h-1.5 bg-purple-500 rounded-full"></span>
+        <div className="bg-white/5 rounded-lg p-3 border border-white/5">
+          <h3 className="font-semibold text-xs text-purple-300 mb-1.5 flex items-center gap-1">
+            <span className="w-1.5 h-1.5 bg-purple-400 rounded-full shadow-[0_0_5px_rgba(192,132,252,0.5)]"></span>
             中心
           </h3>
           <div className="space-y-1.5">
             <div className="flex gap-1.5 items-center">
-              <label className="text-xs font-medium text-gray-600 w-3">X</label>
+              <label className="text-xs font-medium text-slate-400 w-3">X</label>
               <input
                 type="number"
                 value={ellipseCenter.x}
                 onChange={(e) => handleInputChange("centerX", e.target.value)}
-                className="flex-1 px-2 py-1 text-xs border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-purple-400 focus:border-transparent transition-all"
+                className="flex-1 px-2 py-1 text-xs bg-black/20 border border-white/10 text-slate-200 rounded focus:outline-none focus:ring-1 focus:ring-purple-400 focus:border-transparent transition-all"
               />
             </div>
             <div className="flex gap-1.5 items-center">
-              <label className="text-xs font-medium text-gray-600 w-3">Y</label>
+              <label className="text-xs font-medium text-slate-400 w-3">Y</label>
               <input
                 type="number"
                 value={ellipseCenter.y}
                 onChange={(e) => handleInputChange("centerY", e.target.value)}
-                className="flex-1 px-2 py-1 text-xs border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-purple-400 focus:border-transparent transition-all"
+                className="flex-1 px-2 py-1 text-xs bg-black/20 border border-white/10 text-slate-200 rounded focus:outline-none focus:ring-1 focus:ring-purple-400 focus:border-transparent transition-all"
               />
             </div>
           </div>
         </div>
 
-        <div className="bg-white rounded-lg p-2.5 shadow-sm">
-          <h3 className="font-semibold text-xs text-purple-700 mb-1.5 flex items-center gap-1">
-            <span className="w-1.5 h-1.5 bg-purple-500 rounded-full"></span>
+        <div className="bg-white/5 rounded-lg p-3 border border-white/5">
+          <h3 className="font-semibold text-xs text-purple-300 mb-1.5 flex items-center gap-1">
+            <span className="w-1.5 h-1.5 bg-purple-400 rounded-full shadow-[0_0_5px_rgba(192,132,252,0.5)]"></span>
             半径
           </h3>
           <div className="space-y-1.5">
             <div className="flex gap-1.5 items-center">
-              <label className="text-xs font-medium text-gray-600 w-3">a</label>
+              <label className="text-xs font-medium text-slate-400 w-3">a</label>
               <input
                 type="number"
                 value={radiusX}
                 onChange={(e) => handleInputChange("radiusX", e.target.value)}
-                className="flex-1 px-2 py-1 text-xs border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-purple-400 focus:border-transparent transition-all"
+                className="flex-1 px-2 py-1 text-xs bg-black/20 border border-white/10 text-slate-200 rounded focus:outline-none focus:ring-1 focus:ring-purple-400 focus:border-transparent transition-all"
               />
             </div>
             <div className="flex gap-1.5 items-center">
-              <label className="text-xs font-medium text-gray-600 w-3">b</label>
+              <label className="text-xs font-medium text-slate-400 w-3">b</label>
               <input
                 type="number"
                 value={radiusY}
                 onChange={(e) => handleInputChange("radiusY", e.target.value)}
-                className="flex-1 px-2 py-1 text-xs border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-purple-400 focus:border-transparent transition-all"
+                className="flex-1 px-2 py-1 text-xs bg-black/20 border border-white/10 text-slate-200 rounded focus:outline-none focus:ring-1 focus:ring-purple-400 focus:border-transparent transition-all"
               />
             </div>
           </div>
         </div>
 
-        <div className="bg-white rounded-lg p-2.5 shadow-sm">
-          <h3 className="font-semibold text-xs text-purple-700 mb-1.5 flex items-center gap-1">
-            <span className="w-1.5 h-1.5 bg-purple-500 rounded-full"></span>
+        <div className="bg-white/5 rounded-lg p-3 border border-white/5">
+          <h3 className="font-semibold text-xs text-purple-300 mb-1.5 flex items-center gap-1">
+            <span className="w-1.5 h-1.5 bg-purple-400 rounded-full shadow-[0_0_5px_rgba(192,132,252,0.5)]"></span>
             旋转 (弧度)
           </h3>
           <input
@@ -153,13 +156,13 @@ const EllipseCanvas = (): React.JSX.Element => {
             step="0.1"
             value={rotation}
             onChange={(e) => handleInputChange("rotation", e.target.value)}
-            className="w-full px-2 py-1 text-xs border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-purple-400 focus:border-transparent transition-all"
+            className="w-full px-2 py-1 text-xs bg-black/20 border border-white/10 text-slate-200 rounded focus:outline-none focus:ring-1 focus:ring-purple-400 focus:border-transparent transition-all"
           />
         </div>
 
-        <div className="bg-white rounded-lg p-2.5 shadow-sm">
-          <h3 className="font-semibold text-xs text-purple-700 mb-1.5 flex items-center gap-1">
-            <span className="w-1.5 h-1.5 bg-purple-500 rounded-full"></span>
+        <div className="bg-white/5 rounded-lg p-3 border border-white/5">
+          <h3 className="font-semibold text-xs text-purple-300 mb-1.5 flex items-center gap-1">
+            <span className="w-1.5 h-1.5 bg-purple-400 rounded-full shadow-[0_0_5px_rgba(192,132,252,0.5)]"></span>
             旋转 (角度)
           </h3>
           <input
@@ -167,13 +170,13 @@ const EllipseCanvas = (): React.JSX.Element => {
             step="5"
             value={Math.round((rotation * 180) / Math.PI)}
             onChange={(e) => handleInputChange("rotationDeg", e.target.value)}
-            className="w-full px-2 py-1 text-xs border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-purple-400 focus:border-transparent transition-all"
+            className="w-full px-2 py-1 text-xs bg-black/20 border border-white/10 text-slate-200 rounded focus:outline-none focus:ring-1 focus:ring-purple-400 focus:border-transparent transition-all"
           />
         </div>
       </div>
 
       {/* Canvas */}
-      <div className="rounded-xl overflow-hidden shadow-lg border-2 border-gray-200">
+      <div className="rounded-xl overflow-hidden shadow-2xl border border-white/10 bg-black/20 backdrop-blur-sm">
         <Stage
           width={canvasLength}
           height={canvasLength}
